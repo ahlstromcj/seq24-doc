@@ -1,0 +1,22 @@
+Seq24 User Manual
+Chris Ahlstrom
+2015-07-19 to 2015-07-19
+
+This project provides two things:
+
+   1. A user manual for Seq24, the simple, but powerful, looping sequencer
+      for Linux.
+
+   2. Sample items to accompany the manual.
+
+To recreate the PDF file (the latest version is stored in the "pdf"
+directory), you will need to install GNU make, latexmk, tex-live, pdf2latex,
+and other resources related to LaTeX and PDF support.  If everything is
+in place, then change to the "tex" directory, and a simple "make" command
+will create the document.
+
+"make clean" in the top-level directory or the "tex" directory will remove
+all of the generated products.
+
+Lastly, although this manual is well underway, it needs a lot of work and
+a lot of help!
