@@ -48,15 +48,39 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\subsection{Seq24 Versus Other Sequencers}
-\label{subsec:introduction_seq24_vs_others}
-
    This document describes how to use \textsl{Seq24} \cite{seq24},
    a live-looping sequencer with an interface more like a hardware sequencer
-   than the typical software MIDI sequencer.
+   than the typical software MIDI sequencer.  The contents of this document
+   are derived in part from existing documents, such as the \texttt{SEQ24}
+   file shipped with the Seq24 source code, and a printout from a
+   long-lost wiki.
 
-   What are the advantages of
-   \textsl{Seq24} versus others?
+   There are a number of current authors of \texttt{Seq24} today,
+   as one can see in
+   \figureref{fig:seq24_menu_help_credits},
+   and it
+   \figureref{fig:seq24_menu_help_doc}.
+   The original author is Rob C. Buse; where the word "I" occurs, that is
+   probably him.
+
+   \begin{quotation}
+      Written by Rob C. Buse.  I wrote this program to fill a
+      hole.  I figure it would be a waste if I was the only one
+      using it.  So, I released it under the GPL.
+   \end{quotation}
+
+\subsection{Seq24: What and Why?}
+\label{subsec:introduction_seq24_vs_others}
+
+   \texttt{Seq24} is a real-time MIDI sequencer. It was created to 
+   provide a very simple interface for editing and playing 
+   MIDI 'loops'. After searching for a software based 
+   sequencer that would provide the functionality needed for 
+   a live performance, there was little found in the 
+   software realm. I set out to create a very minimal sequencer 
+   that excludes the bloated features of the large software 
+   sequencers, and includes a small subset of features that 
+   I have found usable in performing. 
 
 \subsection{Document Structure}
 \label{subsec:introduction_document_structure}
@@ -121,6 +145,10 @@
    
    Then the \textsl{Seq24} main window appears, as shown in
    \figureref{fig:seq24_main_screen}.
+
+   The program is basically a loop playing machine with a 
+   simple interface.  Before we describe this interface, it is useful to
+   present some concepts.
 
 % Important Concepts
 
