@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-19
+% \update      2015-07-20
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -25,15 +25,34 @@
 
    This section doesn't provide comprehensive coverage of terms.  It
    covers mainly terms that puzzled the author at first or that are
-   necessary to understand the recipes.
+   necessary to understand the \textsl{Seq24} program.
+
+\subsubsection{Concepts / Terms / group}
+\label{subsubsec:concepts_terms_group}
+
+   \index{group}
+   A \textsl{group} in \textsl{Seq24} is one of up to 32 previously-defined
+   mute/unmute patterns in the active screen set.
+   This concept is similar to mute/unmute groups in hardware sequencers.
 
 \subsubsection{Concepts / Terms / loop}
 \label{subsubsec:concepts_terms_loop}
 
-   \textsl{Loop}
    \index{loop}
+   \textsl{Loop}
    is a synonym for \textsl{pattern}.
-   Each loop is represent by a box in the Patterns windows.
+   Each loop is represent by a box in the Patterns window.
+
+\subsubsection{Concepts / Terms / MIDI clock}
+\label{subsubsec:concepts_terms_midi_clock}
+
+   \textsl{MIDI clock} is
+   \index{midi clock}
+   a MIDI timing reference signal used to synchronize pieces of equipment
+   together. MIDI clock runs at a rate of 24 ppqn (pulses per quarter note).
+   This means that the actual speed of the MIDI clock varies with the tempo
+   of the clock generator (as contrasted with time code, which runs at a
+   constant rate).
 
 \subsubsection{Concepts / Terms / pattern}
 \label{subsubsec:concepts_terms_pattern}
@@ -53,12 +72,28 @@
    \index{performance}
    \textsl{performance} is an organized collection of patterns.
 
+\subsubsection{Concepts / Terms / queue mode}
+\label{subsubsec:concepts_terms_queue_mode}
+
+   To be determined.
+
 \subsubsection{Concepts / Terms / screen set}
 \label{subsubsec:concepts_terms_screen_set}
 
    The \textbf{screen set}
    \index{screen set}
-   is a ...
+   is a set of patterns that fit within the 8x4 grid of loops/pattern in the
+   Patterns panel.
+   \textsl{Seq24} supports multiple screens sets, and a name can be given to
+   each for clarity.
+
+\subsubsection{Concepts / Terms / sequence}
+\label{subsubsec:concepts_terms_sequence}
+
+   \index{sequence}
+   \textsl{Sequence} seems to be
+   another synonym for \textsl{pattern}, used in some of the \textsl{Seq24}
+   documentation..
 
 %-------------------------------------------------------------------------------
 % vim: ts=3 sw=3 et ft=tex

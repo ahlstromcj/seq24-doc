@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-19
+% \update      2015-07-20
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -43,19 +43,31 @@
    \label{fig:seq24_menu_file_items}
 \end{figure}
 
+   \begin{enumber}
+      \item \textbf{New}
+      \item \textbf{Open...}
+      \item \textbf{Save}
+      \item \textbf{Save As...}
+      \item \textbf{Import...}
+      \item \textbf{Options...}
+      \item \textbf{Exit}
+   \end{enumber}
+
 \subsection{Menu / File / New}
 \label{subsec:menu_file_new}
 
-   TODO
+   The \textbf{New} menu entry clears out any current song and patterns,
+   along one to create news ones from scratch.
 
 \subsubsection{Menu / File / Open}
 \label{subsubsec:seq24_menu_file_open}
 
-   TODO
+   The \textbf{Open} menu entry opens a song that had been saved previously.
+   It opens up a standard GTK+ file dialog.
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=0.75]{menu/menu_file_open.png}
+   \includegraphics[scale=0.50]{menu/menu_file_open.png}
    \caption{File Open}
    \label{fig:seq24_menu_file_open}
 \end{figure}
@@ -63,21 +75,25 @@
 \subsubsection{Menu / File / Save (As)}
 \label{subsubsec:menu_file_open_save_as}
 
-   TODO
+   The \textbf{Save As} menu entry saves a song under a different name.
+   It opens up a standard GTK+ file dialog.
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=0.75]{menu/menu_file_save_as.png}
+   \includegraphics[scale=0.50]{menu/menu_file_save_as.png}
    \caption{File Save As}
    \label{fig:seq24_menu_file_save_as}
 \end{figure}
 
-   TODO
+   The \textbf{Save} menu entry saves the song under its current name.
+   If there is no current name, then
+   it opens up a standard GTK+ file dialog.
 
 \subsubsection{Menu / File / Import}
 \label{subsubsec:seq24_menu_file_import}
 
-   TODO
+   The \textbf{Import} menu entry allows one to import a MIDI file
+   into a pattern.
 
 \begin{figure}[H]
    \centering 
@@ -86,17 +102,39 @@
    \label{fig:seq24_menu_file_import}
 \end{figure}
 
-   TODO
+   When imported, each track, whether a music track or an information track,
+   is entered into its own loop/pattern box.  The import operation can
+   handle reasonably complex files, as shown in the following diagram, which
+   shows an import of the \texttt{contrib/b4uacuse.mid} file, which contains
+   a transcription of an Eric Clapton tune that we'd made over 20 
+   years ago and had uploaded to the \textsl{GEnie} network service.
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[scale=0.50]{menu/imported_midi_song.png}
+   \caption{File Import}
+   \label{fig:seq24_imported_midi_song}
+\end{figure}
+
+   Unfortunately, this song was created before the days of General MIDI.
+   It is scored for the Yamaha PSS-790 consumer-level synthesizer.
+   One can use our MIDI-conversion project (see reference \cite{midicvt}) 
+   to convert it to General MIDI format, including General MIDI drums.
 
 \subsubsection{Menu / File / Options}
 \label{subsubsec:seq24_menu_file_options}
 
-   TODO
+   This menu provides a number of settings in one tabbed dialog, shown in
+   the figure below.
+   This window allows us to select which sequence gets the MIDI
+   clock, and which incoming MIDI events control the sequencer.
 
 \paragraph{Menu / File / Options / MIDI Clock}
 \label{paragraph:seq24_menu_file_options_midi_clock}
 
-   TODO
+   Provides a way to send the MIDI clock to one or more of the
+   \textsl{Seq24} output busses.
+   It is used to configure to what busses the MIDI clock gets dumped.
 
 \begin{figure}[H]
    \centering 
@@ -105,12 +143,49 @@
    \label{fig:seq24_menu_file_options_midi_clock}
 \end{figure}
 
-   Used to configure to what bus the MIDI clock gets dumped.
+   The following elements are present in this dialog:
+
+   \begin{enumber}
+      \item \textbf{Buss Name}
+      \item \textbf{Off}
+      \item \textbf{On (Pos)}
+      \item \textbf{On (Mod)}
+      \item \textbf{Clock Start Modulo}
+   \end{enumber}
+
+   \setcounter{ItemCounter}{0}      % Reset the ItemCounter for this list.
+
+   \itempar{Buss Name}{midi clock!buss name}
+   These labels indicate the output busses of \textsl{Seq24}.
+   They range from \textbf{[1] seq24 1}
+   to \textbf{[16] seq24 16}.
+
+   \itempar{Off}{midi clock!off}
+   This setting disables the MIDI clock for the given output buss.
+
+   \itempar{On (Pos)}{midi clock!on (pos)}
+   The MIDI clock will be sent to this buss.
+   MIDI Song Position and MIDI Continue will be sent if playback is starting
+   at greater than tick 0 in Song mode.  Otherwise, MIDI Start will be sent.
+
+   \itempar{On (Mod)}{midi clock!on (mod)}
+   The MIDI clock will be sent to this buss.
+   MIDI Start will be sent and clocking will begin
+   once the Song Position has reached the start modulo of the specified size
+   (see the next item's description).
+   This setting is used for gear that does not respond to Song Position.
+
+   \itempar{Clock Start Modulo}{midi clock!clock start modulo}
+   Clock Start Modulo (1/16 Notes).
+   This value starts at 1 and ranges on upward to 16384.
+   It  defaults to 64.
+   It is used by the \textbf{On (Mod)} setting discussed above.
 
 \paragraph{Menu / File / Options / MIDI Input}
 \label{paragraph:seq24_menu_file_options_midi_input}
 
-   TODO
+   The only item in this tab is the single MIDI input buss provided
+   by \textsl{Seq24}:  \textbf{[0] seq24 0}.
 
 \begin{figure}[H]
    \centering 
@@ -119,12 +194,15 @@
    \label{fig:seq24_menu_file_options_midi_input}
 \end{figure}
 
-   TODO
+   This item, if checked allows \textbf{Seq24} to be used to record MIDI
+   information from another source, or pass it through to the output busses
+   that are configured to allow pass-through.
 
 \paragraph{Menu / File / Options / Keyboard }
 \label{paragraph:seq24_menu_file_options_keyboard}
 
-   TODO
+   \textsl{Seq24}, as befits a professional product, allows extensive use of
+   keyboard shortcuts to make operations go faster than when using a mouse.
 
 \begin{figure}[H]
    \centering 
@@ -133,12 +211,98 @@
    \label{fig:seq24_menu_file_options_keyboard}
 \end{figure}
 
-   TODO
+   We won't attempt to cover every user-interface item in this dialog, just
+   the categories.
+
+   \begin{enumber}
+      \item \textbf{Show key labels on sequences}
+      \item \textbf{Control keys}
+      \item \textbf{Sequence toggle keys}
+      \item \textbf{Mute-group slots}
+      \item \textbf{Learn}
+      \item \textbf{Disable}
+      \item \textbf{Enable}
+   \end{enumber}
+
+   \setcounter{ItemCounter}{0}      % Reset the ItemCounter for this list.
+
+   \itempar{Show key labels on sequence}{keyboard!show labels}
+   This item, if enabled, shows the key labels in the lower-right corner of
+   each loop/pattern in the Patterns window.
+
+   \itempar{Control keys}{keyboard!control keys}
+   This block of fields provides shortcut keys for many operations of
+   \textsl{Seq24}.
+
+   \begin{enumber}
+      \item \textbf{Start}.
+         Key: \index{keys!space} \textbf{space}.
+      \item \textbf{Stop}.
+         Key: \index{keys!esc} \textbf{Escape}.
+      \item \textbf{Snapshot 1}.
+         Key: \index{keys!alt-L} \textbf{Alt\_L}.
+      \item \textbf{Snapshot 2}.
+         Key: \index{keys!alt-R} \textbf{Alt\_R}.
+      \item \textbf{bpm up}.
+         Key: \index{keys!apostrophe} \textbf{apostrophe}.
+      \item \textbf{bpm down}.
+         Key: \index{keys!;} \textbf{semicolon}.
+      \item \textbf{Replace}.
+         Key: \index{keys!ctrl-L} \textbf{Control\_L}.
+      \item \textbf{Queue}.
+         Key: \index{keys!ctrl-R} \textbf{Control\_R}.
+      \item \textbf{Keep queue}.
+         Key: \index{keys!backslash} \textbf{backslash}.
+      \item \textbf{Screenset down}.
+         Key: \index{keys![} \textbf{bracketleft}.
+      \item \textbf{Screenset up}.
+         Key: \index{keys!]} \textbf{bracketright}.
+      \item \textbf{Set playing screenset}.
+         Key: \index{keys!home} \textbf{Home}.
+   \end{enumber}
+
+   Note that some of the keys have positional mnemonic value.  For example,
+   for BPM control, the semicolon is at the left (down), and the apostrophe
+   is at the right (up).
+
+   TODO: One thing we need to figure out is just what this "snapshot"
+   feature provides.  Another thing is the "queue" and "keep queue"
+   features.
+
+   \itempar{Sequence toggle keys}{keyboard!sequence toggle keys}
+   Each of these keys toggles the playing/muting of one of the 32
+   loop/pattern boxes.  These keys are layed out logically on the keyboard,
+   and can also be shown in each loop/pattern box.  No need to list them all
+   here!
+
+   \itempar{Mute-group slots}{keyboard!mute-group slots}
+   Each of these keys operates on the mute-grouping of one of the 32
+   loop/pattern boxes.  These keys are layed out logically on the keyboard,
+   and can also be shown in each loop/pattern box.  No need to list them all
+   here!
+
+   TODO: One thing we need to discover is just what this mute-grouping
+   means.
+
+   \itempar{Learn}{keyboard!learn}
+   Learn (while pressing a mute-group key).
+   This items sets the key used to initiate a learn mode.
+   It is the \textbf{Insert} key by default.
+
+   \itempar{Disable}{keyboard!disable}
+   TODO: What gets disabled?
+   It is the \textbf{apostrophe} key by default.
+
+   \itempar{Enable}{keyboard!enable}
+   TODO: What gets enabled?
+   It is the \textbf{igrave} (back-tick) key by default.
+
+   There is much to learn about this learn/enable/disable triad!
 
 \paragraph{Menu / File / Options / Mouse }
 \label{paragraph:seq24_menu_file_options_mouse}
 
-   TODO
+   This item selects the mouse-interaction method.
 
 \begin{figure}[H]
    \centering 
@@ -147,12 +311,19 @@
    \label{fig:seq24_menu_file_options_mouse}
 \end{figure}
 
-   TODO
+   The default method is \textbf{seq24 (original style)}.
+   The alternate method is \textbf{fruity (similar to a certain well known
+   sequencer)}.
+
+   The alternate method is presumably that of the \textsl{Fruity Loops}
+   (now \textsl{FL Studio}) sequencer.
+   
+   TODO: But we currently have no idea what that means.
 
 \paragraph{Menu / File / Options / Jack Sync }
 \label{paragraph:seq24_menu_file_options_jack_sync}
 
-   TODO
+   This tab sets up options for JACK synchronization.
 
 \begin{figure}[H]
    \centering 
@@ -161,12 +332,56 @@
    \label{fig:seq24_menu_file_options_jack_sync}
 \end{figure}
 
-   TODO
+   \begin{enumber}
+      \item \textbf{Transport}
+      \item \textbf{Jack start mode}
+      \item \textbf{Connect}
+      \item \textbf{Disconnect}
+   \end{enumber}
+
+   \setcounter{ItemCounter}{0}      % Reset the ItemCounter for this list.
+
+   \itempar{Transport}{jack sync!transport}
+   This items collects the following settings:
+
+   \begin{itemize}
+      \item \textbf{Jack Transport}.
+         \index{JACK!transport}
+         Enables synchronization with JACK Transport.
+      \item \textbf{Transport Master}.
+         \index{JACK!transport master}
+         \textsl{Seq24} will attempt to serve as the JACK Master.
+      \item \textbf{Master Conditional}.
+         \index{JACK!master conditional}
+         \textsl{Seq24} will fail to serve as the JACK Master if there is
+         already a Master set.
+   \end{itemize}
+
+   \itempar{Transport}{jack sync!transport}
+   This items collects the following settings:
+
+   \begin{itemize}
+      \item \textbf{Live Mode}.
+         \index{JACK!live mode}
+         Playback will be in live mode.  Use this option to allow muting and
+         unmuting of loops.
+      \item \textbf{Song Mode}.
+         \index{JACK!song mode}
+         Playback will use only the Song Editor's data.
+   \end{itemize}
+
+   \itempar{Connect}{jack sync!connect}
+   Connect to JACK Sync.
+
+   \itempar{Disconnect}{jack sync!disconnect}
+   Disconnect from JACK Sync.
 
 \subsection{Menu / View}
 \label{subsec:seq24_menu_view}
 
-   TODO
+   This menu item has only one entry, \textbf{Song Editor}, 
+   which is already covered by a button at the bottom of the Patterns
+   window.  Selecting this item bring up the Song Editor window.
 
 \subsection{Menu / Help About...}
 \label{subsec:seq24_menu_about}
@@ -190,7 +405,8 @@
    \label{fig:seq24_menu_help_credits}
 \end{figure}
 
-   TODO
+   Shows who has worked on the program, with the original author at the top
+   of the list.
 
 \begin{figure}[H]
    \centering 
@@ -199,7 +415,8 @@
    \label{fig:seq24_menu_help_doc}
 \end{figure}
 
-   TODO
+   Shows who has documented this project.  Say, maybe "we" can get "our"
+   name their someday!  :-)
 
 
 %-------------------------------------------------------------------------------

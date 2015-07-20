@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-19
+% \update      2015-07-20
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -17,19 +17,26 @@
 \section{Patterns Panel}
 \label{sec:seq24_patterns_panel}
 
+   \textsl{Seq24} works with the idea of patterns (loops) that are repeated
+   all along a song.  One composes and edits small patterns, and combines
+   them to create a full song.  This is a powerful way to work, and makes
+   one productive within an hour.
+
    The \textsl{Seq24 Patterns Panel} is the main window of \textsl{Seq24}.
    See \figureref{fig:seq24_main_screen}.
+   It is here one manages a set of patterns
+   (see \sectionref{subsubsec:concepts_terms_screen_set}),
+   manages the configuration, and opens the pattern or song editors.
 
    For exposition, we break it into a top panel, a pattern panel, and a
    bottom panel.    Note that the \textsl{Seq24} main menu is discussed in
    \sectionref{sec:seq24_menu}.
 
-   TODO
-
 \subsection{Patterns, Top Panel}
 \label{subsec:seq24_patterns_panel_top}
 
-   TODO
+   The top panel of the Pattern window is simple, consisting of the name of
+   the program and a couple of controls.
 
 \begin{figure}[H]
    \centering 
@@ -38,12 +45,64 @@
    \label{fig:pattern_window_top_panel_items}
 \end{figure}
 
-   TODO
+   \begin{enumber}
+      \item \textbf{Song Progress}
+      \item \textbf{Mute Group Learn}
+   \end{enumber}
+
+   \setcounter{ItemCounter}{0}      % Reset the ItemCounter for this list.
+
+   \itempar{Song Progress}{pattern!progress}
+   \index{song!progress}
+   This bar shows a number of small black cursors that show the progress of
+   the song through the various patterns.  For short patterns, the progress
+   is fast.  For patterns that last longer, the progress is slow.
+   This field shows that something is going on, but that is about as useful
+   as it gets.  Note that the individual loops/patterns have their own
+   moving progress cursor, a tall thin line in each box.
+
+   \itempar{Mute Group Learn}{pattern!mute group learn}
+   \index{"L" button}
+   This button is also known as the "L" button.
+   Click this button, and then press a mute-group key
+   to store the mute-state of the sequences in that key.
+
+   See the \textbf{File / Options / Keyboard} menu entry to bring up the
+   dialog showing the available mute-group keys and the corresponding
+   hot-key for the "L" button.
+
+   \index{group!toggle}
+	One can toggle the playing status of up to 32 previously 
+	defined mute/unmute patterns (groups) in the active screen 
+	set, similar to hardware sequencers. 
+	This toggling is done either by one of the \textsl{group toggle} keys 
+	or by a MIDI controller, both assigned in the
+   \texttt{~/.seq24rc} file. 
+	A mute/unmute pattern (group) is stored by holding a 
+   \index{group!learn}
+   \textsl{group learn} key ('Insert' by default) while pressing the
+   corresponding \textsl{group toggle} key. 
+	There are also keys assigned to turn on/off the group 
+	functionality.
 
 \subsection{Patterns, Main Panel}
 \label{subsec:seq24_patterns_panel_main}
 
    The main panel of the Patterns window provides a grid of empty boxes.
+   Each box represents a loop or pattern.
+   One sees only 32 loops in the main panel.
+   \index{screen set}
+   This is a screen set, as discussed in
+   \sectionref{subsubsec:concepts_terms_screen_set}.
+   One can switch between sets
+   by using the
+   \index{keys![}
+   '[' and
+   \index{keys!]}
+   ']' keys on the keyboard, or by using
+   the spin-widget-driven, labelled set.  
+   There are a total of 32 sets, for a total of 
+   1024 loops/patterns. 
 
 \begin{figure}[H]
    \centering 
@@ -52,10 +111,19 @@
    \label{fig:pattern_window_main_panel_items}
 \end{figure}
 
-   Each box represents a loop or pattern.
+   \begin{enumber}
+      \item \textbf{Pattern Slot}
+      \item \textbf{Pattern}
+   \end{enumber}
+
+\subsubsection{Pattern Slot}
+\label{subsubsec:seq24_patterns_pattern_slot}
+
+   \index{pattern!slot}
+   An empty box is a slot for a pattern.
    \index{pattern!right click}
-   By right-clicking on an empty box you bring up a menu to create
-   a new loop.
+   By right-clicking on an empty box one brings up a menu to create
+   a new loop, as well as some other operations:
 
 \begin{figure}[H]
    \centering 
@@ -82,29 +150,66 @@
    Pastes a loop or pattern that was previously copied.
 
    \itempar{Song / Mute All Tracks}{pattern!mute all}
-   This item mutes all tracks (or loops/patterns?)
+   This item is the one item in the \textbf{Song} context menu;
+   it mutes all tracks (or loops/patterns?)
 
+\subsubsection{Pattern}
+\label{subsubsec:seq24_patterns_pattern_filled}
 
+   A filled pattern slot is referred to informally as a pattern.
+   A pattern is shown in the Pattern windows as a filled box with the
+   following items of information in it:
 
+   \begin{itemize}
+      \item \textbf{Name}.
+         \index{pattern!name}
+         This line contains the name or title of the pattern, to help
+         reference it when juggling a number of patters.
+      \item \textbf{Contents}.
+         \index{pattern!contents}
+         The contents of the pattern provide a fairly detailed and
+         distinguishable representation of the notes or events in the
+         pattern.  Also, when the song is playing, a vertical bar cursor
+         tracks the position of the playback of the pattern or loop; it
+         returns to the beginning of the box every time that pattern starts
+         over again.
+      \item \textbf{Span}.
+         \index{pattern!span}
+         This pair of numbers shows the starting measure of the pattern and
+         the measure just after the end of the pattern.
+         For example, "0-2" means one measure, and it is the first measure.
+         (TODO:  verify this conjecture)
+      \item \textbf{Beat}.
+         \index{pattern!beat}
+         This pair of numbers is the standard time-signature of the pattern,
+         such as "4/4" or "3/4".
+      \item \textbf{Shortcut Key}.
+         If the display of shortcut keys is enabled (see
+         \sectionref{paragraph:seq24_menu_file_options_keyboard}),
+         then the key noted in the lower-right corner of the pattern can be
+         pressed to toggle the mute/unmute status of that pattern.
+         This action is an alternative to left-clicking on the pattern.
+   \end{itemize}
 
+   \index{pattern!left click}
+   Right-clicking on an already-filled box will toggle the status of the
+   pattern between mute (black?) and unmuted (white?).
 
    \index{pattern!right click}
-   By right-clicking on an already-filled box you bring up a menu
-   or edit a existing one.
+   By right-clicking on an already-filled box, one brings up a menu
+   to allow one to edit a existing one, or perform a few other actions
+   specified in the context menu.  Here is that menu:
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=1.0]{pattern/pattern-right-click-menu.png}
+   \includegraphics[scale=0.75]{pattern/pattern-right-click-menu.png}
    \caption{Existing Pattern, Right-Click Menu}
    \label{fig:pattern_window_right_click}
 \end{figure}
 
-   Right-Clicking will bring up a menu of available options
-   for the sequence.  Here you can select the MIDI bus/channel.
-   One can also clear all performance data for the pattern (on/off).
+   Here one can select the MIDI bus/channel.
+   One can also clear all performance data for the pattern.
    
-   TODO: See section [3d] for more info.
-
    \begin{enumber}
       \item \textbf{Edit...}
       \item \textbf{Cut}
@@ -137,7 +242,7 @@
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=1.0]{pattern/pattern-menu-song.png}
+   \includegraphics[scale=0.75]{pattern/pattern-menu-song.png}
    \caption{Existing Pattern, Right-Click Menu, Song}
    \label{fig:pattern_window_right_click_song}
 \end{figure}
@@ -180,51 +285,88 @@
    \label{fig:pattern_window_right_click_midi_bus_numbers}
 \end{figure}
 
+\subsubsection{Pattern Keys and Click}
+\label{subsubsec:seq24_patterns_pattern_keys_and_clicks}
 
+   This section recapitulates all the clicks and keys that perform actions
+   in the Pattern windows.  Some additional clicks and keys are noted here
+   as well.
 
+\paragraph{Pattern Keys}
+\label{paragraph:seq24_patterns_pattern_keys}
+
+   \index{keys!pattern toggles}
+   Hitting its assigned keyboard key will
+   also toggle its status.  Below is the grid that is
+   mapped to the loops/patterns on the screen set.
+   This grid can be changed in the Keyboard options tab.
+
+   \begin{verbatim}
+     [ 1   ][ 2   ][ 3   ][ 4   ][ 5   ][ 6   ][ 7   ][ 8   ]
+     [ q   ][ w   ][ e   ][ r   ][ t   ][ y   ][ u   ][ i   ]
+     [ a   ][ s   ][ d   ][ f   ][ g   ][ h   ][ j   ][ k   ]
+     [ z   ][ x   ][ c   ][ v   ][ b   ][ n   ][ m   ][ ,   ]
+   \end{verbatim}
+
+   These characters are shown in the lower right corner of each
+   pattern, as an aid to memory.
+
+   The \index{keys![} '[' and
+   \index{keys!]} ']' keys on the keyboard
+   switch between sets.
+
+   We're not sure about the functionality of the next keys.
+   The handling of 'Alt' is generally taken over by the window manager.
+
+   \index{keys!alt}
+	Holding 'Alt' will save the state of playing sequences
+	and restore them when 'Alt' is lifted.
+
+   \index{keys!left ctrl alt}
+	Holding 'Left Ctrl' and 'Alt' at the same time will enable
+	one to flip over to new sequences briefly and then
+	flip right back upon lifting 'Alt'.
+
+   \index{keys!right ctrl}
+	Holding 'Right Ctrl' will queue a on/off toggle for a 
+	sequence when the loop ends. Queue also works for mute/unmute 
+	patterns (groups); in this case every sequence will toggle 
+	its status after its individual loop end. 
+
+   \index{keys!backslash}
+	Pressing the 'keep queue' key (by default, the backslash key)
+   assigned in the \textsl{~/.seq24rc} file
+	activates permanent queue mode until you use the temporary 
+	Queue function again pressing 'Right Ctrl'. 
+
+\paragraph{Pattern Clicks}
+\label{paragraph:seq24_patterns_pattern_Clicks}
 
    \index{pattern!left click}
+   \index{pattern!mute toggle}
    Left-clicking on a pattern-filled box will change its state
    \index{pattern!mute}
    \index{pattern!unmute}
    from muted (white) to playing (black) when
    the sequencer is running.
 
-   \index{pattern!mute toggle}
-   Left-clicking on a Tracks will toggle its playing
-   status.  Hitting its assigned keyboard key will
-   also toggle its status.  Below is the grid that is
-   mapped to the loops/patterns on the screen set.
-
-   \begin{verbatim}
-      [1    ][2    ][3    ][4    ][5    ][6    ][7    ][8    ]
-      [q    ][w    ][e    ][r    ][t    ][y    ][u    ][i    ]
-      [a    ][s    ][d    ][f    ][g    ][h    ][j    ][k    ]
-      [z    ][x    ][c    ][v    ][b    ][n    ][m    ][,    ]
-   \end{verbatim}
-
-   These characters are shown in the lower right corner of each
-   pattern, as an aid to memory.
-
    \index{pattern!left ctrl click}
-   Holding down 'Left Ctrl' while selecting a sequence 
+   \index{keys!left ctrl}
+   Holding down 'Left Ctrl' while selecting a sequence (pattern)
    will mute all other sequences and turn on the selected
    sequences.
 
    \index{pattern!left click-drag}
    By clicking and holding the left button on a sequence,
-   you can drag it to a new location on the grid.  The box
+   one can drag it to a new location on the grid.  The box
    will disappear while dragged, and reappear in the new location when
    dropped.
-
-   HERE HERE HERE
-
-
 
 \subsection{Patterns, Bottom Panel}
 \label{subsec:seq24_patterns_panel_bottom}
 
-   TODO
+   The bottom panel of the Patterns window provides way to control the
+   overall playback of the song.
 
 \begin{figure}[H]
    \centering 
@@ -233,7 +375,46 @@
    \label{fig:pattern_window_bottom_panel_items}
 \end{figure}
 
-   TODO
+   \begin{enumber}
+      \item \textbf{Stop}
+      \item \textbf{Play}
+      \item \textbf{bpm}
+      \item \textbf{Name}
+      \item \textbf{Set}
+      \item \textbf{Toggle Song Editor}
+   \end{enumber}
+
+   \setcounter{ItemCounter}{0}      % Reset the ItemCounter for this list.
+
+   \itempar{Stop}{song!stop}
+   The red button stops the playback of the song and all its loops/patterns.
+   It is not clear if it also sends MIDI Off messages on all notes.
+
+   \itempar{Play}{song!Play}
+   Starts the playback of the whole song.
+
+   \itempar{bpm}{song!bpm}
+   The spin widget adjusts the "Beats Per Minute" or BPM value.  The
+   range of this field is from 20 bpm to 500 bpm, with a default value of
+   120 bpm.
+   Although this field looks editable, it is not.  Most keystrokes
+   that are entered actually toggle one of the pattern boxes.
+
+   \itempar{Name}{song!set name}
+   Each of the 32 available screen sets can be given a name by entering it
+   into this field.
+
+   \itempar{Set}{song!set number}
+   This spin widget selects the current screen set.  The values in this
+   field range from 0 to 31, and default to 0.
+   Although this field looks editable, it is not.  Most keystrokes
+   that are entered actually toggle one of the pattern boxes.
+
+   \textbf{Bug:}
+   \index{bugs!set name has side-effect}
+   While one is typing in the name of the set in this field, the keystrokes
+   will affect the panel window, causing playback to start and pattern
+   boxes to be toggled!
 
 
 %-------------------------------------------------------------------------------
