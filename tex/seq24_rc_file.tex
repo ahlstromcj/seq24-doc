@@ -1,0 +1,288 @@
+%-------------------------------------------------------------------------------
+% seq24_rc_file
+%-------------------------------------------------------------------------------
+%
+% \file        seq24_rc_file.tex
+% \library     Documents
+% \author      Chris Ahlstrom
+% \date        2015-07-20
+% \update      2015-07-20
+% \version     $Revision$
+% \license     $XPC_GPL_LICENSE$
+%
+%     Provides the rc_file.
+%
+%-------------------------------------------------------------------------------
+
+\section{Seq24rc Configuration File}
+\label{sec:seq24_rc_file}
+
+   The \textsl{Seq24} configuration file is called
+   \texttt{.seq24rc}, and it is stored in the user's \texttt{\$HOME}
+   directory.
+
+   After you run \textsl{Seq24} for the first time, it will generate a
+   \texttt{.seq24rc} file in your home directory.
+   It contains the the data for remote MIDI control, keyboard
+   control, and MIDI clock.
+
+\subsection{Seq24rc MIDI Control Section}
+\label{subsec:seq24_rc_file_midi_control}
+
+   For each pattern, we can set up MIDI events to turn a 
+	pattern on, off, or to toggle it.  This setup is in the 
+   MIDI Control section of \texttt{.seq24rc}, and begins with an
+   "INI" group marker \texttt{[midi-control]}.
+	
+   THe MIDI Control section is implicitly broken into subsections, though those
+   subsections are marked with comment-lines for better comprehensibility.
+   The subsections of the MIDI Control section are:
+
+   \begin{enumber}
+      \item \textbf{pattern group}.  Consists of 32 lines, one for each
+         pattern box shown in the Pattern window.
+      \item \textbf{mute in group}.  Consists of 32 lines, one for each
+         pattern box shown in the Pattern window.
+      \item \textbf{automation group}.  Each item in this group consists of
+         one line.
+         \begin{enumber}
+            \item \textbf{bpm up}. Consists of one line.
+            \item \textbf{bpm down}. Consists of one line.
+            \item \textbf{screen-set up}. Consists of one line.
+            \item \textbf{screen-set down}. Consists of one line.
+            \item \textbf{mod replace}. Consists of one line.
+            \item \textbf{mod snapshot}. Consists of one line.
+            \item \textbf{mod queue}. Consists of one line.
+            \item \textbf{mod gmute}. Consists of one line.
+            \item \textbf{mod glearn}. Consists of one line.
+            \item \textbf{screen-set play}. Consists of one line.
+         \end{enumber}
+   \end{enumber}
+
+   We see the following lines in the MIDI Control section, which is broken
+   into groups or subsections marked by comments:
+
+   \begin{verbatim}
+      [midi-control]
+      74
+
+      # pattern group
+       0  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]            
+       1  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]          
+       2  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+      ...     ...            ...              ...
+      31  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]    
+
+      # mute in group
+      32  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+      33  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+      ...     ...            ...              ...
+      63  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # bpm up
+      64  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # bpm down
+      65  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # screen set up
+      66  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # screen set down
+      67  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # mod replace
+      68  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # mod snapshot
+      69  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # mod queue
+      70  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # mod gmute
+      71  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # mod glearn
+      72  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+
+      # screen set play
+      73  [0 0 0 0 0 0]   [0 0 0 0 0 0]   [0 0 0 0 0 0]   
+   \end{verbatim}
+
+   The number (74) is the number of lines in the MIDI Control section.
+
+   The first number is the pattern/sequence number in the main window, which
+   ranges from 0 to 31.  Each set of brackets corresponds to a MIDI filter.
+   The MIDI filter in the leftmost brackets is the \textsl{toggle} filter.
+   The MIDI filter in the middles brackets is the \textsl{on} filter.
+   The MIDI filter in the rightmost brackets is the \textsl{off} filter.
+   If the incoming MIDI event matches the filter, it will either [toggle],
+   [on], or [off] the pattern/sequence, respectively.
+
+   The layout of each filter inside the bracket is as follows:
+
+      [OPR INV STAT D1 D2min D2max]
+
+   where
+
+   \begin{itemize}
+      \item \textbf{OPR} = \textbf{on/off}
+      \item \textbf{INV} = \textbf{inverse}
+      \item \textbf{STAT} = \textbf{MIDI status byte} (channel ignored) 
+      \item \textbf{D1} = \textbf{data1}
+      \item \textbf{D2min} = \textbf{data2 min}
+      \item \textbf{D2max} = \textbf{data2 max}
+   \end{itemize}
+
+   If \textbf{on/off} is set to 1, it will match the incoming MIDI against
+   the \textbf{MIDI status byte} pattern and perform the action
+   (on/off/toggle) if the data falls in the range specified.  All values are
+   in decimal.
+
+	The \textbf{inverse} field will make the pattern perform the opposite 
+   action (\textsl{off} for \textsl{on}, \textsl{on} for \textsl{off}) if
+   the data falls outside the specified range.  This is cool because one can
+   map several sequences to a knob or fader.
+
+	The last three fields describe the range of data that will match.
+
+\subsubsection{Seq24rc MIDI Control Pattern Group}
+\label{subsubsec:seq24_rc_file_midi_control_pattern_group}
+
+   Complex?  Here is an example for the some of the first 32 lines, which
+   comprise the \textsl{pattern group}.
+   The following is an example of responding
+   to Note On events for note 0, with any velocity, to turn the pattern on,
+   and Note off events for note 0, and any velocity, to turn the pattern
+   off.
+
+   \begin{verbatim}
+	          Toggle                 On                      Off
+        1 [0 0 0 0 0 0]      [1 0  144 0 0 127]       [1 0 128 0 0 127]
+   \end{verbatim}
+
+   The \textbf{toggle} field is off (inactive).
+
+   The \textbf{on} field is on (active).  Inverse is inactive.  The
+   \textbf{MIDI status byte}, 144, is 0x90 (hex), which is a Note On event
+   on channel 0.  However, the channel is ignored.  \textbf{data1} is 0, and
+   \textbf(data2) can range from 0 to 127.
+
+   The \textbf{off} field is on (active).  The \textbf{MIDI status byte},
+   128, is 0x80 (hex), which is a Note Off event on channel 0.  Again, the
+   channel is ignored.  \textbf{data1} is 0, and \textbf{data2} can range
+   from 0 to 127.
+
+   So, basically, pattern 1 starts when any Note On is received, and
+   it stops when any Note Off is received.
+
+   The following example would map a row of sequences to one knob sending
+   out changes for Control Code 1:
+
+   \begin{verbatim}
+	          Toggle                 On                      Off
+        0 [0 0 0 0 0 0]      [1 1 176 1   0   15]     [0 0 0 0 0 0]
+        1 [0 0 0 0 0 0]      [1 1 176 1  16   31]     [0 0 0 0 0 0]
+        2 [0 0 0 0 0 0]      [1 1 176 1  32   47]     [0 0 0 0 0 0]
+        3 [0 0 0 0 0 0]      [1 1 176 1  48   63]     [0 0 0 0 0 0]
+        4 [0 0 0 0 0 0]      [1 1 176 1  64   79]     [0 0 0 0 0 0]
+        5 [0 0 0 0 0 0]      [1 1 176 1  80   95]     [0 0 0 0 0 0]
+        6 [0 0 0 0 0 0]      [1 1 176 1  96  111]     [0 0 0 0 0 0]
+        7 [0 0 0 0 0 0]      [1 1 176 1 112  127]     [0 0 0 0 0 0]
+   \end{verbatim}
+
+   The \textbf{on} field is on (active).  Inverse is active.  The
+   \textbf{MIDI status byte}, 176, is 0xB0 (hex), which is a Control Change
+   event (channel ignored).  \textbf{data1} is 1, which is the controller
+   number for a Modulation Wheel.  The \textbf{data2} ranges are set so
+   that, as the controller data increases (as the modulation-wheel knob is
+   turned, so to speak), patterns 0 through 7 come on one at a time until
+   all are running.
+
+\subsubsection{Seq24rc MIDI Control Mute In Group}
+\label{subsubsec:seq24_rc_file_midi_control_mute_in_group}
+
+   \index{mute-in group}
+   \index{midi-control!mute-in group}
+   This section controls 32 groups of mutes in the same way as 
+	defined for \texttt{[midi-control]}, and is in fact placed in the
+   \texttt{[midi-control]} section.
+
+   A group is a set of patterns that can toggle their playing state
+   together.  Every group contains all 32 sequences in the active screen set
+   (see after).
+
+   So, this part of the MIDI Control section is used for muting and unmuting
+   (and toggling) a group of patterns.
+
+\subsubsection{Seq24rc MIDI Control Automation Group}
+\label{subsubsec:seq24_rc_file_midi_control_automation_group}
+
+   \index{automation group}
+   \index{midi-control!automation group}
+
+   \setcounter{ItemCounter}{0}      % Reset the ItemCounter for this list.
+
+   \itempar{bpm up}{midi-control!bpm up}
+   Increases the BPM (speed) of the sequencer based on MIDI input.
+
+   \itempar{bpm down}{midi-control!bpm down}
+   Decreases the BPM (speed) of the sequencer based on MIDI input.
+
+   \itempar{screen-set up}{midi-control!screen-set up}
+   Increases the active screen-set of the sequencer based on MIDI input.
+
+   \itempar{screen-set down}{midi-control!screen-set down}
+   Decreases the active screen-set of the sequencer based on MIDI input.
+
+   \itempar{mod replace}{midi-control!mod replace}
+   TODO.
+
+   \itempar{mod snapshot}{midi-control!mod snapshot}
+   TODO.
+
+   \itempar{mod queue}{midi-control!mod queue}
+   TODO.
+
+   \itempar{mod gmute}{midi-control!mod gmute}
+   TODO.
+
+   \itempar{mod glearn}{midi-control!mod glearn}
+   TODO.
+
+   \itempar{screen-set play}{midi-control!screen-set play}
+   TODO.
+
+\subsection{Seq24rc Mute-Group Section}
+\label{subsec:seq24_rc_file_mute_group}
+     
+   This section is delimited by the \texttt{[mute-group]} construct.
+
+   \begin{verbatim}
+      [mute-group]
+      1024
+       0 [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0]
+       1 [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0]
+       2 [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0]
+      ...      ...               ...               ...               ...
+      31 [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0]
+   \end{verbatim}
+
+   The initial number, 1024 is...... WHAT?
+
+   In this group are the definitions of the state of the 32 sequences
+   in the playing screen set when a group is selected.
+   group [state of the first 8 sequences] [second 8] [third 8] [fourth 8]
+
+   After the list of sequences and their MIDI events, you can 
+   set \textsl{Seq24} to handle MIDI events and change the following: 
+
+   MORE TO ADD HERE FROM the SEQ24 file!!!!!!!!!!!
+
+% \subsubsection{group}
+% \label{subsubsec:seq24_rc_file_terms_group}
+
+%-------------------------------------------------------------------------------
+% vim: ts=3 sw=3 et ft=tex
+%-------------------------------------------------------------------------------

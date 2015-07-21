@@ -17,9 +17,8 @@
 \section{Pattern Editor}
 \label{sec:seq24_pattern_editor}
 
-   The \textsl{Seq24 Pattern Editor} is used to edit a pattern.
-
-   TODO
+   The \textsl{Seq24 Pattern Editor} is used to edit and preview a pattern,
+   as well as to configure its buss and channel settings.
 
 \begin{figure}[H]
    \centering 
@@ -229,6 +228,9 @@
    The piano roll is the heart of the pattern (loop, sequence) editor.
    It is a bit different in style than other editors.
 
+\subsubsection{Pattern Editor, Piano Roll Description}
+\label{subsubsec:seq24_pattern_editor_piano_roll_description}
+
 \begin{figure}[H]
    \centering 
    \includegraphics[scale=0.75]{pattern/pattern-edit-piano-roll-items.png}
@@ -257,12 +259,85 @@
    measure, and is marked by a blocky \textbf{END} marker.
 
    \itempar{Virtual Keyboard}{piano roll!virtual keyboard}
+   The virtual keyboard is a fairly powerful interface.  It shows,
+   by shadowing, which note on the keyboard one will be drawing. It can be
+   played with a mouse, to preview a short motif.
+   It can show marks to indicate off-scale notes, to make them easy to
+   avoid.
 
    \itempar{Notes}{piano roll!notes}
+   Musical notes are indicated by short bars.  The bars provide a visual
+   representation of the pitch of the note and the length of the notes
 
    \itempar{Events}{piano roll!events}
+   The small (just a few pixels high) Events windows shows discrete events,
+   such as Note On and Note Off and their velocities, or various control and
+   their values.
 
    \itempar{Event Values}{piano roll!event values}
+   The events values for the currently selected category of events are shown
+   in this window as vertical lines of a height proportional to the value.
+
+\subsubsection{Pattern Editor, Event Editing}
+\label{subsubsec:seq24_pattern_editor_event_editing}
+
+   Note editing is a bit different with \textsl{Seq24}, since it
+   requires two mouse buttons in many cases.  There are some new
+   laptop touchpads from FocalTech that have only one mouse button, and
+   use positioning to determine if the click is a left or right click.
+   The Linux drivers for this touchpad aren't sophisticated enough (as far
+   as we know) to handle converting a two-fingered press properly.
+   We've found that a good solution is to use a four-button USB trackball
+   configued with an easy middle-button setup.
+   It's easier than a touchpad, anyway.
+
+   \index{editor!right click hold}
+	On both the note (grid) window and the event window, \textbf{holding}
+	down the \textbf{right} mouse button will change the cursor
+	to a pencil and put the editor into 'draw' mode.
+   
+   \index{editor!left click right hold}
+   Then while still \textbf{holding} the \textbf{right} mouse button, click
+   the \textbf{left} mouse button to \textbf{insert} new notes.  Many people
+   find this combination strange at first, but once one gets used to it, it
+   becomes a very fast method of note manipulation.
+
+   \index{editor!middle click}
+   Pressing the \textbf{middle} mouse button will let one change 
+	the length of the note. 
+
+   \index{editor!left click}
+	The \textbf{left} mouse button lets you select multiple events 
+   which can then be clicked and moved,
+   \index{editor!cut}
+   \index{keys!ctrl X}
+   cut (Ctrl-X), 
+   \index{editor!copy}
+   \index{keys!ctrl C}
+   copy (Ctrl-C),
+   \index{editor!paste}
+   \index{keys!ctrl V}
+   or pasted (Ctrl-V).
+   When the notes are selected,
+   \index{editor!delete}
+   \index{keys!del}
+   you can delete them with the Delete key.
+
+   For the appearance of selected events (orange), see
+   \figureref{fig:pattern_editor_selected_events}.
+
+	Right-clicking on the event strip (directly under
+	the piano roll grid) will allow you to add/select/move 
+	midi events (not note on/off messages) somewhat like the 
+	piano grid.
+
+	The event value (data) editor (directly under the event strip) is used 
+	to change note velocities, channel pressure, control codes,
+	patch select, etc.
+   \index{editor!draw}
+   Just left-click+drag the mouse across the window to draw a line.  The
+   values will match that line.  Any events that are selected in the paino
+   roll or event strip can have their values modified with the mouse wheel.
 
 \begin{figure}[H]
    \centering 
