@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-20
+% \update      2015-07-21
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -84,6 +84,27 @@
    \caption{File Save As}
    \label{fig:seq24_menu_file_save_as}
 \end{figure}
+
+   To save a new file, or to save the current existing file to a new name,
+   enter the name in the name field, \textsl{without an extension}.
+   \textsl{Seq24} will append a \texttt{.midi} extension to the filename.
+
+   The file will be save in a format the the Linux \textsl{file} command
+   will tag as something like:
+
+   \begin{verbatim}
+      myfile.midi: Standard MIDI data (format 1) using 16 tracks at 1/192
+   \end{verbatim}
+
+   It looks like a simple MIDI file, and yet, if one re-opens it in
+   \textsl{Seq24}, one sees that all of the labelling, pattern information,
+   and song layout has been preserved in this file.
+   Even the pattern subsections, as discussed in
+   \sectionref{subsubsec:seq24_song_editor_arrangement_panel_roll},
+   have been saved.
+   (But the L and R marker positions are not saved.)
+
+   HOW?  HOW?  HOW?
 
    The \textbf{Save} menu entry saves the song under its current name.
    If there is no current name, then
