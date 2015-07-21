@@ -104,7 +104,11 @@
    have been saved.
    (But the L and R marker positions are not saved.)
 
-   HOW?  HOW?  HOW?
+   Compare the sizes of the original project MIDI file,
+   \texttt{contrib/b4uacuse.mid}, and the output MIDI file after
+   \textsl{Seq24} saved the patterns and the song layout we created,
+   \texttt{contrib/b4uacuse-seq24.midi}.  The latter is a lot
+   bigger.  
 
    The \textbf{Save} menu entry saves the song under its current name.
    If there is no current name, then
@@ -261,17 +265,17 @@
       \item \textbf{Stop}.
          Key: \index{keys!esc} \textbf{Escape}.
       \item \textbf{Snapshot 1}.
-         Key: \index{keys!alt-L} \textbf{Alt\_L}.
+         Key: \index{keys!alt-l} \textbf{Alt\_L}.
       \item \textbf{Snapshot 2}.
-         Key: \index{keys!alt-R} \textbf{Alt\_R}.
+         Key: \index{keys!alt-r} \textbf{Alt\_R}.
       \item \textbf{bpm up}.
          Key: \index{keys!apostrophe} \textbf{apostrophe}.
       \item \textbf{bpm down}.
          Key: \index{keys!;} \textbf{semicolon}.
       \item \textbf{Replace}.
-         Key: \index{keys!ctrl-L} \textbf{Control\_L}.
+         Key: \index{keys!ctrl-l} \textbf{Control\_L}.
       \item \textbf{Queue}.
-         Key: \index{keys!ctrl-R} \textbf{Control\_R}.
+         Key: \index{keys!ctrl-r} \textbf{Control\_R}.
       \item \textbf{Keep queue}.
          Key: \index{keys!backslash} \textbf{backslash}.
       \item \textbf{Screenset down}.
@@ -285,6 +289,10 @@
    Note that some of the keys have positional mnemonic value.  For example,
    for BPM control, the semicolon is at the left (down), and the apostrophe
    is at the right (up).
+
+   Also note that the keys definable in this tab are only a subset of the
+   various keys that can be used, especially keys used with the
+   \texttt{Ctrl} key.
 
    TODO: One thing we need to figure out is just what this "snapshot"
    feature provides.  Another thing is the "queue" and "keep queue"
@@ -337,9 +345,21 @@
    sequencer)}.
 
    The alternate method is presumably that of the \textsl{Fruity Loops}
-   (now \textsl{FL Studio}) sequencer.
+   (now \textsl{FL Studio}) sequencer.  The fruity mode seems to involve the
+   following (based on scanning the source code):
    
-   TODO: But we currently have no idea what that means.
+   \begin{itemize}
+      \item \textbf{Left-click left side}.
+         Begin a grow/shrink operation for the left side.
+      \item \textbf{Left-click right side}.
+         Begin a grow/shrink operation for the right side.
+      \item \textbf{Left-click middle}.
+         Move the object.
+      \item \textbf{Left-click}.
+         Add an event if nothing selected.
+      \item \textbf{Middle-click}.
+         Split the note?
+   \end{itemize}
 
 \paragraph{Menu / File / Options / Jack Sync }
 \label{paragraph:seq24_menu_file_options_jack_sync}

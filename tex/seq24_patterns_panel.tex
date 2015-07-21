@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-20
+% \update      2015-07-21
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -29,7 +29,7 @@
    manages the configuration, and opens the pattern or song editors.
 
    For exposition, we break it into a top panel, a pattern panel, and a
-   bottom panel.    Note that the \textsl{Seq24} main menu is discussed in
+   bottom panel.  Note that the \textsl{Seq24} main menu is discussed in
    \sectionref{sec:seq24_menu}.
 
 \subsection{Patterns, Top Panel}
@@ -65,7 +65,7 @@
    \index{"L" button}
    This button is also known as the "L" button.
    Click this button, and then press a mute-group key
-   to store the mute-state of the sequences in that key.
+   to store the mute-state of the patterns in that key.
 
    See the \textbf{File / Options / Keyboard} menu entry to bring up the
    dialog showing the available mute-group keys and the corresponding
@@ -80,7 +80,7 @@
    \texttt{~/.seq24rc} file. 
 	A mute/unmute pattern (group) is stored by holding a 
    \index{group!learn}
-   \textsl{group learn} key ('Insert' by default) while pressing the
+   \textsl{group learn} key (\texttt{Insert} by default) while pressing the
    corresponding \textsl{group toggle} key. 
 	There are also keys assigned to turn on/off the group 
 	functionality.
@@ -97,9 +97,9 @@
    One can switch between sets
    by using the
    \index{keys![}
-   '[' and
+   \texttt{[} and
    \index{keys!]}
-   ']' keys on the keyboard, or by using
+   \texttt{]} keys on the keyboard, or by using
    the spin-widget-driven, labelled set.  
    There are a total of 32 sets, for a total of 
    1024 loops/patterns. 
@@ -311,24 +311,26 @@
    These characters are shown in the lower right corner of each
    pattern, as an aid to memory.
 
-   The \index{keys![} '[' and
-   \index{keys!]} ']' keys on the keyboard
+   \index{keys![}
+   The \texttt{[} and
+   \index{keys!]}
+   \texttt{]} keys on the keyboard
    switch between sets.
 
-   We're not sure about the functionality of the next keys.
-   The handling of 'Alt' is generally taken over by the window manager.
+   We're not sure about the functionality of the next keys.  The handling of
+   \texttt{Alt} is generally taken over by the window manager.
 
    \index{keys!alt}
-	Holding 'Alt' will save the state of playing sequences
-	and restore them when 'Alt' is lifted.
+   Holding \texttt{Alt} will save the state of playing patterns and restore
+   them when \texttt{Alt} is lifted.  Not yet sure exactly what this means.
 
    \index{keys!left ctrl alt}
-	Holding 'Left Ctrl' and 'Alt' at the same time will enable
-	one to flip over to new sequences briefly and then
-	flip right back upon lifting 'Alt'.
+   Holding \texttt{Left Ctrl} and \texttt{Alt} at the same time will enable
+   one to flip over to new patterns briefly and then flip right back upon
+   lifting \texttt{Alt}.  Not yet sure exactly what this means.
 
    \index{keys!right ctrl}
-	Holding 'Right Ctrl' will queue a on/off toggle for a 
+	Holding \texttt{Right Ctrl} will queue a on/off toggle for a 
 	sequence when the loop ends. Queue also works for mute/unmute 
 	patterns (groups); in this case every sequence will toggle 
 	its status after its individual loop end. 
@@ -337,7 +339,7 @@
 	Pressing the 'keep queue' key (by default, the backslash key)
    assigned in the \textsl{~/.seq24rc} file
 	activates permanent queue mode until you use the temporary 
-	Queue function again pressing 'Right Ctrl'. 
+	Queue function again pressing \texttt{Right Ctrl}. 
 
 \paragraph{Pattern Clicks}
 \label{paragraph:seq24_patterns_pattern_Clicks}
@@ -350,11 +352,11 @@
    from muted (white) to playing (black) when
    the sequencer is running.
 
-   \index{pattern!left ctrl click}
+   \index{pattern!left ctrl left click}
    \index{keys!left ctrl}
-   Holding down 'Left Ctrl' while selecting a sequence (pattern)
-   will mute all other sequences and turn on the selected
-   sequences.
+   Holding down \texttt{Left Ctrl} while selecting a sequence (pattern)
+   will mute all other patterns and turn on the selected
+   pattern.
 
    \index{pattern!left click-drag}
    By clicking and holding the left button on a sequence,
@@ -389,9 +391,13 @@
    \itempar{Stop}{song!stop}
    The red button stops the playback of the song and all its loops/patterns.
    It is not clear if it also sends MIDI Off messages on all notes.
+   \index{keys!esc (stop)}
+   The keystroke for stopping playback is the \texttt{Escape} character.
 
    \itempar{Play}{song!Play}
    Starts the playback of the whole song.
+   \index{keys!space (play)}
+   The keystroke for starting playback is the \texttt{Space} character.
 
    \itempar{bpm}{song!bpm}
    The spin widget adjusts the "Beats Per Minute" or BPM value.  The

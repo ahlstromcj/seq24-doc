@@ -38,7 +38,7 @@
       \item \textbf{Bottm Panel}
    \end{enumber}
 
-\subsection{Pattern Editor, First Panel}
+\subsection{Pattern Editor / First Panel}
 \label{subsec:seq24_pattern_editor_first}
 
    The top bar of the Pattern (sequence) Editor lets you change the name of
@@ -94,7 +94,7 @@
    This settings select the MIDI output channel, or port.
    The possible values range from 1 to 16.
 
-\subsection{Pattern Editor, Second Panel}
+\subsection{Pattern Editor / Second Panel}
 \label{subsec:seq24_pattern_editor_second}
 
    The second panel of the Pattern Editor provides a number of additional
@@ -127,6 +127,8 @@
    session.
    It will roll back one change each time it is pressed.
    It is not certain what the undo limit is, however.
+   \index{keys!ctrl-z}
+   Pressing \texttt{Ctrl-Z} is the same as using the \textbf{Undo} button.
 
    \itempar{Redo}{pattern editor!redo}
    The Redo button will restore any undone changes to the pattern from this
@@ -159,8 +161,20 @@
    \textbf{All Notes}, which selects all notes in the pattern;
    \textbf{Inverse Notes}, which inverts the selection of notes.
 
-   Note that the left mouse button also lets one select multiple events and
-   notes.
+   \index{left click}
+   Pressing the left button on a note or a event deselects all other notes
+   or events, and selects the item clicked on.
+
+   \index{ctrl left click}
+   Pressing the \texttt{Ctrl} key and the left button on a note or a event
+   \textsl{adds} that event to the selection.
+
+   \index{left click drag}
+   Note that pressing the left mouse button and dragging also lets one
+   select multiple events and notes.
+
+   \index{keys!ctrl-a}
+   \texttt{Ctrl-A} will select all of the events in the pattern editor.
 
    \textbf{Modify Time} offers two ways to tweak the timing of the selected
    note:
@@ -227,13 +241,13 @@
    \label{fig:pattern_editor_background_sequence_menu}
 \end{figure}
 
-\subsection{Pattern Editor, Piano Roll}
+\subsection{Pattern Editor / Piano Roll}
 \label{subsec:seq24_pattern_editor_piano_roll}
 
    The piano roll is the heart of the pattern (loop, sequence) editor.
    It is a bit different in style than other editors.
 
-\subsubsection{Pattern Editor, Piano Roll Description}
+\subsubsection{Pattern Editor / Piano Roll Description}
 \label{subsubsec:seq24_pattern_editor_piano_roll_description}
 
 \begin{figure}[H]
@@ -283,7 +297,7 @@
    The events values for the currently selected category of events are shown
    in this window as vertical lines of a height proportional to the value.
 
-\subsubsection{Pattern Editor, Event Editing}
+\subsubsection{Pattern Editor / Event Editing}
 \label{subsubsec:seq24_pattern_editor_event_editing}
 
    Note editing is a bit different with \textsl{Seq24}, since it
@@ -295,6 +309,9 @@
    We've found that a good solution is to use a four-button USB trackball
    configued with an easy middle-button setup.
    It's easier than a touchpad, anyway.
+
+   Note that, if only a middle-button is needed, ctrl-left-button will
+   simulate that button.
 
    \index{pattern editor!right click hold}
 	On both the note (grid) window and the event window, \textbf{holding}
@@ -319,41 +336,56 @@
    short note, and then use the operation described in the next paragraph to
    change the length of the note.
 
+   \index{pattern editor!ctrl left click}
    \index{pattern editor!middle click}
-   Pressing the \textbf{middle} mouse button will let one change 
+   Pressing the \textbf{middle} mouse button \textbf{\textsl{or}}
+   pressing the \textbf{ctrl left} mouse button tandem will let one change 
 	the length of the note. 
+   If more than one note is selected, then the length of all selected notes
+   is changed.
+   
+   \textbf{Warning}:  If one reduces the length of a note by more than its
+   current length, the note will end up "infinitely" long.
 
-   \index{pattern editor!left click}
+   \index{pattern editor!left click drag}
 	The \textbf{left} mouse button lets you select multiple events 
    which can then be clicked and moved,
    \index{pattern editor!cut}
-   \index{keys!ctrl X}
-   cut (Ctrl-X), 
+   \index{keys!ctrl-x}
+   cut (\texttt{Ctrl-X}), 
    \index{pattern editor!copy}
-   \index{keys!ctrl C}
-   copy (Ctrl-C),
+   \index{keys!ctrl-c}
+   copy (\texttt{Ctrl-C}),
    \index{pattern editor!paste}
-   \index{keys!ctrl V}
-   or pasted (Ctrl-V).
+   \index{keys!ctrl-v}
+   or pasted (\texttt{Ctrl-V}).
    When the notes are selected,
    \index{pattern editor!delete}
    \index{keys!del}
-   you can delete them with the Delete key.
+   you can delete them with the \texttt{Delete} key.
 
    For the appearance of selected events (orange), see
    \figureref{fig:pattern_editor_selected_events}.
 
-	Right-clicking on the event strip (directly under
+	Left-click or right-click on events in the event strip (directly under
 	the piano roll grid) will allow you to add/select/move 
-	midi events (not note on/off messages) somewhat like the 
+	MIDI events (including note on/off messages) somewhat like the 
 	piano grid.
 
 	The event value (data) editor (directly under the event strip) is used 
 	to change note velocities, channel pressure, control codes,
 	patch select, etc.
-   \index{pattern editor!draw}
+   \index{event data editor!draw}
+   \index{event data editor!left click}
+   \index{event data editor!right click}
+   \index{event data editor!middle click}
    Just left-click+drag the mouse across the window to draw a line.  The
-   values will match that line.  Any events that are selected in the paino
+   values will match that line.  
+   middle-click+drag and right-click+drag also
+   draw the value line.
+   
+   \index{event data editor!mouse wheel}
+   Any events that are selected in the paino
    roll or event strip can have their values modified with the mouse wheel.
 
 \begin{figure}[H]
@@ -363,12 +395,74 @@
    \label{fig:pattern_editor_selected_events}
 \end{figure}
 
-   TODO
+   \index{left click}
+   Pressing the left button on a note or a event deselects all other notes
+   or events, and selects the item clicked on.
 
-\subsection{Pattern Editor, Bottom Panel}
+   \index{ctrl left click}
+   Pressing the \texttt{Ctrl} key and the left button on a note or a event
+   \textsl{adds} that event to the selection.
+
+   \index{left click drag}
+   Note that pressing the left mouse button and dragging also lets one
+   select multiple events and notes.
+
+   The \textbf{Tools} button described in
+   \sectionref{subsec:seq24_pattern_editor_second} can also be used to
+   modify selections.
+
+   \index{keys!ctrl-a}
+   \texttt{Ctrl-A} will select all of the events in the pattern editor.
+
+   \index{pattern editor!ctrl left click}
+   \index{pattern editor!middle click}
+   Pressing the \textbf{middle} mouse button \textbf{\textsl{or}}
+   pressing the \textbf{ctrl left} mouse button tandem will let one change 
+	the length of the note. 
+   If more than one note is selected, then the length of all selected notes
+   is changed.
+
+   \index{pattern editor!event stretch}
+   \index{pattern editor!shift middle click drag}
+   Once a selection of notes is made, one can use the
+   Shift-middle-click+drag sequence over the selected notes to
+   draw a box beyond the extent of the notes.  When the mouse is released,
+   each of the events is moved and lengthed to be proporationally longer to
+   fit exactly within the box one drew.
+   This feature is called \textsl{event stretch}.
+
+   \index{pattern editor!event compression}
+   If the box that was drawn was shorter than the original extent of the
+   notes, then the notes move and shrink proportionally to occupy the
+   smaller box.
+   This feature is called \textsl{event compression}.
+   
+   \textbf{Warning}:  If one reduces the length of a note by more than its
+   current length, the note will end up "infinitely" long.
+
+   \index{pattern editor!left click drag}
+	The \textbf{left} mouse button lets you select multiple events 
+   which can then be clicked and moved,
+   \index{pattern editor!cut}
+   \index{keys!ctrl-x}
+   cut (\texttt{Ctrl-X}), 
+   \index{pattern editor!copy}
+   \index{keys!ctrl-c}
+   copy (\texttt{Ctrl-C}),
+   \index{pattern editor!paste}
+   \index{keys!ctrl-v}
+   or pasted (\texttt{Ctrl-V}).
+   When the notes are selected,
+   \index{pattern editor!delete}
+   \index{keys!del}
+   you can delete them with the \texttt{Delete} key.
+
+\subsection{Pattern Editor / Bottom Panel}
 \label{subsec:seq24_pattern_editor_bottom}
 
-   TODO
+   The bottom panel of the Pattern Editor provides for selecting events for
+   viewing and edition, and the MIDI playback, pass-through, and recording
+   options of \textsl{Seq24}.
 
 \begin{figure}[H]
    \centering 
@@ -377,8 +471,73 @@
    \label{fig:pattern_editor_bottom_panel_items}
 \end{figure}
 
-   TODO
+   \begin{enumber}
+      \item \textbf{Event Selector}
+      \item \textbf{Event Selection}
+      \item \textbf{Time Scroll}
+      \item \textbf{Data To MIDI Buss}
+      \item \textbf{MIDI Data Pass-Through}
+      \item \textbf{Record MIDI Data}
+      \item \textbf{Quantized Record}
+      \item \textbf{Select Recording Volume}
+   \end{enumber}
 
+   \setcounter{ItemCounter}{0}      % Reset the ItemCounter for this list.
+
+   \itempar{Event Selector}{pattern editor!event selector}
+   This button brings up the following context menu, so that the user can
+   select the category of events to view and edit.
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[scale=1.0]{pattern/event-context-menu.png}
+   \caption{Pattern Editor, Event Button Context Menu}
+   \label{fig:pattern_editor_bottom_event_context_menu}
+\end{figure}
+
+   The sub-menus of this context menu show 128 controller messages,
+   so we won't try to show all of them here.
+
+   These sub-menus can be modified, as far as we know, by editing
+   the file \texttt{\$HOME/.seq24usr}, to make it match your instrument.
+
+   TODO: Eventually, this manual will provide a section on setting up that
+   file.
+
+   \itempar{Event Selection}{pattern editor!event selection}
+   Shows the selection event, with its number shown in hexadecimal notation,
+   and the name of the event shown.
+
+   \itempar{Time Scroll}{pattern editor!time scroll}
+   Allows one to pan through the whole pattern, if it is too long to fit in
+   the window.
+
+   \itempar{Data To MIDI Buss}{pattern editor!data to midi buss}
+   Activating this button will cause the pattern to be output to the MIDI
+   output buss, which will normally be connected to a software or hardware
+   synthesizer, to be heard.
+
+   \itempar{MIDI Data Pass-Through}{pattern editor!midi data pass-through}
+   Activating this button will route incoming MIDI data through
+   \textsl{Seq24}, which will then write it to the MIDI output buss.
+
+   \itempar{Record MIDI Data}{pattern editor!record midi data}
+   Activating this button will route incoming MIDI data into
+   \textsl{Seq24}, which will then save the data to its buffer, and also
+   display the new information (notes) in the piano roll view.
+
+   \itempar{Quantized Record}{pattern editor!quantized record}
+   Activating this button will also cause MIDI data to be recorded, but it
+   will be quantized on the fly before saving it.
+
+   \itempar{Vol}{pattern editor!vol}
+   This button allows controlling the volumen of the recording.
+
+   TODO: need a menu screen capture.
+
+   The values provided are:
+   Free, Fixed 8, Fixed 7, Fixed 6, Fixed 5, Fixed 4, Fixed 3,
+   Fixed 2, and Fixed 1.
 
 %-------------------------------------------------------------------------------
 % vim: ts=3 sw=3 et ft=tex
