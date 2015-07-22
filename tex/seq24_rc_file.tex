@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-20
-% \update      2015-07-21
+% \update      2015-07-22
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -244,22 +244,40 @@
    Decreases the active screen-set of the sequencer based on MIDI input.
 
    \itempar{mod replace}{[midi-control]!mod replace}
+   This item provides a way to automate replacement.
    TODO.
+   \index{todo!explain replacement}
+   Explain the concept of replacement.
 
    \itempar{mod snapshot}{[midi-control]!mod snapshot}
+   This item provides a way to automate snapshots.
    TODO.
+   \index{todo!explain snapshots}
+   Explain the concept of snapshots.
 
    \itempar{mod queue}{[midi-control]!mod queue}
+   This item provides a way to automate queueing.
    TODO.
+   \index{todo!explain queue}
+   Explain the concept of queue.
 
    \itempar{mod gmute}{[midi-control]!mod gmute}
-   TODO.
+   \index{group!muting}
+   This item provides a way to automate group-muting.
+   Explain the concept of snapshots.
 
    \itempar{mod glearn}{[midi-control]!mod glearn}
+   \index{group!learning}
+   This item provides a way to automate group-learning.
    TODO.
+   \index{todo!group learning}
+   Explain the concept of group-learning.
 
    \itempar{screen-set play}{[midi-control]!screen-set play}
+   This item provides a way to automate screen set play.
    TODO.
+   \index{todo!explain queue}
+   Explain the concept of screen set play.
 
 \subsection{Seq24rc / Mute-Group Section}
 \label{subsec:seq24_rc_file_mute_group}
@@ -293,7 +311,13 @@
    The MIDI Clock fields will contain the clocking state from the last 
    time \textsl{Seq24} was run.  Turn off the clock with a 0, or on with a 1.
    This section has 16 entries, one for each MIDI output buss that
-   \textsl{Seq24} supports.  Here is the format:
+   \textsl{Seq24} supports.
+
+   This configuration item is the same as the 
+   \textbf{MIDI Clock} tab described in
+   \paragraphref{paragraph:seq24_menu_file_options_midi_clock}
+   
+   Here is the format:
 
    \begin{verbatim}
       [midi-clock]
@@ -391,6 +415,10 @@
    Some keys should not be assigned to control sequences in \textsl{Seq24} as
    they are already assigned in the \textsl{Seq24} menu (with \texttt{Ctrl}). 
 
+   This configuration item is the same as the 
+   \textbf{Keyboard} tab described in
+   \sectionref{paragraph:seq24_menu_file_options_keyboard}.
+
    \begin{verbatim}
       [keyboard-group]
       # Key #, group # 
@@ -444,6 +472,10 @@
    The JACK Transport options are also command-line options, as indicated in
    the comments below.
 
+   This configuration item is the same as the 
+   \textbf{Jack Sync} tab described in
+   \sectionref{paragraph:seq24_menu_file_options_jack_sync}.
+
    \index{--jack\_transport}
    \index{--jack\_master}
    \index{--jack\_master\_cond}
@@ -475,17 +507,34 @@
 \label{subsec:seq24_rc_file_other_midi}
 
    \index{[midi-clock-mod-ticks]}
+   This configuration item is the same as the
+   \textbf{Clock Start Modulo} option described in
+   \paragraphref{paragraph:seq24_menu_file_options_midi_clock}.
+
    \begin{verbatim}
       [midi-clock-mod-ticks]
       64
    \end{verbatim}
 
    \index{[midi-input]}
+   This configuration item is the same as the 
+   \textbf{MIDI Input} tab described in
+   \paragraphref{paragraph:seq24_menu_file_options_midi_input}.
+   The "1" is undoubtedly a record count, and would equal the number of
+   supported input ports.
+   This "rc" entry here has two variables; the first is the record number or
+   port number, and the second number indicates whether it is disabled (0),
+   or enabled (1).
+
    \begin{verbatim}
       [midi-input]
       1
-      0 0 # [0] seq24 0
+      0 0            # [0] seq24 0
    \end{verbatim}
+
+   There is no user-interface item for the following value, but
+   it does correspond to the \texttt{--manual\_alsa\_ports} command-line
+   option.
 
    \index{[manual-alsa-ports]}
    \begin{verbatim}
@@ -497,6 +546,11 @@
    \end{verbatim}
 
    \index{[interaction-method]}
+   This configuration item is the same as the 
+   \textbf{Mouse} tab described in
+   \paragraphref{paragraph:seq24_menu_file_options_mouse}.
+
+   \index{[interaction-method]}
    \begin{verbatim}
       # 0 - 'seq24' (original seq24 method)
       # 1 - 'fruity' (similar to a certain fruity sequencer we like)
@@ -505,6 +559,9 @@
       0
    \end{verbatim}
 
+   We're not sure what directory the following item refers to.
+   It is empty in our "rc" file.
+
    \index{[last-used-dir]}
    \begin{verbatim}
       [last-used-dir]
@@ -512,8 +569,9 @@
       # Last used directory.
    \end{verbatim}
 
-% \subsubsection{group}
-% \label{subsubsec:seq24_rc_file_terms_group}
+
+\iffalse
+\fi
 
 %-------------------------------------------------------------------------------
 % vim: ts=3 sw=3 et ft=tex

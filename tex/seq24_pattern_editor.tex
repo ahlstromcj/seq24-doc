@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-21
+% \update      2015-07-22
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -35,7 +35,7 @@
       \item \textbf{First Panel}
       \item \textbf{Second Panel}
       \item \textbf{Piano-Roll/Events Panel}
-      \item \textbf{Bottm Panel}
+      \item \textbf{Bottom Panel}
    \end{enumber}
 
 \subsection{Pattern Editor / First Panel}
@@ -82,7 +82,7 @@
    The possible values range from 1 to 16, then 32, and 64.
 
    \textsl{(It would sure be nice to have a value that represents
-   "indefinite", so that the loop or pattern would be more like track,
+   "indefinite", so that the loop or pattern would be more like a track,
    and perhaps not be repeatable.)}
 
    \itempar{MIDI Out Device}{pattern editor!midi out device}
@@ -90,7 +90,7 @@
    \textsl{Seq24}.  The settings look a lot like
    \figureref{fig:pattern_window_right_click_midi_bus}.
 
-   \itempar{MIDI OUT Port}{pattern editor!midi out port}
+   \itempar{MIDI Out Port}{pattern editor!midi out port}
    This settings select the MIDI output channel, or port.
    The possible values range from 1 to 16.
 
@@ -135,9 +135,10 @@
    session.
    It will restore one change each time it is pressed.
    It is not certain what the redo limit is, however.
+   There doesn't seem to be a "Redo" key.
 
    \itempar{Quantize Selection}{pattern editor!quantize}
-   Pressing this button will quantize the selected events, presumable as per
+   Pressing this button will quantize the selected events, presumably as per
    the \textbf{Grid Snap} setting.
 
    \itempar{Tools}{pattern editor!tools}
@@ -157,31 +158,38 @@
       \item \textbf{Modify Pitch}
    \end{enumber}
 
-   \textbf{Select} provides two sets of selections for notes:
-   \textbf{All Notes}, which selects all notes in the pattern;
-   \textbf{Inverse Notes}, which inverts the selection of notes.
+   $\bullet$ \textbf{Select} provides two sets of selections for notes:
+   \begin{itemize}
+      \item \textbf{All Notes}, which selects all notes in the pattern;
+         Note that \index{keys!ctrl-a} \texttt{Ctrl-A} will also select
+         all of the events in the pattern editor.
+      \item \textbf{Inverse Notes}, which inverts the selection of notes.
+   \end{itemize}
 
-   \index{left click}
-   Pressing the left button on a note or a event deselects all other notes
-   or events, and selects the item clicked on.
+   Other event-selection actions are provided:
 
-   \index{ctrl left click}
-   Pressing the \texttt{Ctrl} key and the left button on a note or a event
-   \textsl{adds} that event to the selection.
+   \begin{itemize}
+      \item \index{left click}
+         Pressing the left button on a note or a event deselects all other
+         notes or events, and selects the item clicked on.
+      \item \index{ctrl left click}
+         Pressing the \texttt{Ctrl} key and the left button on a note or a
+         event \textsl{adds} that event to the selection.
+      \item \index{left click drag}
+         Pressing the left mouse button and dragging also lets one
+         select multiple events and notes.
+      \item \index{ctrl left click drag}
+         Pressing the \texttt{Ctrl} while left-click+dragging lets one
+         make additional selections of multiple events and notes.
+   \end{itemize}
 
-   \index{left click drag}
-   Note that pressing the left mouse button and dragging also lets one
-   select multiple events and notes.
-
-   \index{keys!ctrl-a}
-   \texttt{Ctrl-A} will select all of the events in the pattern editor.
-
-   \textbf{Modify Time} offers two ways to tweak the timing of the selected
-   note:
-   \textbf{Quantize Selected Notes}, which quantizes the selected notes,
-   presumably the same way as the \textbf{Quantize} ("\textbf{Q}") button;
-   \textbf{Tighten Selected Notes}, which presumably is a less strict form
-   of quantization.  (Need more information).
+   $\bullet$ \textbf{Modify Time} offers two ways to tweak the timing of the
+   selected note:
+   $\bullet$ \textbf{Quantize Selected Notes}, which quantizes the selected
+   notes, presumably the same way as the \textbf{Quantize} ("\textbf{Q}")
+   button; \textbf{Tighten Selected Notes}, which presumably is a less
+   strict form of quantization.
+   TODO: \index{"todo!what is tighten"} Need more information about this.
 
    \textbf{Modify Pitch} has only one entry, \textbf{Transpose Selected},
    which brings up the following sub-menu:
@@ -241,14 +249,36 @@
    \label{fig:pattern_editor_background_sequence_menu}
 \end{figure}
 
+   Once the desired pattern is selected from that list, it appears as
+   gray notes, along with the notes that are part of the pattern.  (Also
+   note the orange selected notes and events in the following figure.)
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[scale=0.75]{pattern/background-sequence-notes.png}
+   \caption{Background Sequence Notes}
+   \label{fig:pattern_editor_background_sequence_notes}
+\end{figure}
+
+   The gray notes shown represent a rhythm pattern.
+
 \subsection{Pattern Editor / Piano Roll}
 \label{subsec:seq24_pattern_editor_piano_roll}
 
    The piano roll is the heart of the pattern (loop, sequence) editor.
-   It is a bit different in style than other editors.
+   While it is very similar to note editors in other sequencers, it is a bit
+   different in feel.  A good mouse with 3 or more buttons is practically a
+   necessity for editing.  We tend to like the Logitech Marble Mouse, an
+   ambidextrous USB trackball.  It has four bottons, and we use the
+   \texttt{contrib/scripts/marblemouse} script to set up the left small
+   button as a middle button.  The script merely makes the following call:
 
-\subsubsection{Pattern Editor / Piano Roll Description}
-\label{subsubsec:seq24_pattern_editor_piano_roll_description}
+   \begin{verbatim}
+      xmodmap -e "pointer = 1 8 3 4 9 6 7 2 5 10 11"
+   \end{verbatim}
+
+\subsubsection{Pattern Editor / Piano Roll Items}
+\label{subsubsec:seq24_pattern_editor_piano_roll_items}
 
 \begin{figure}[H]
    \centering 
@@ -273,9 +303,11 @@
    for the pattern.
 
    \itempar{Measure}{piano roll!measure}
-   The heavy vertical lines represent the measures defined by the configuration
-   for the pattern.  Also note that the end of the pattern occurs at a
-   measure, and is marked by a blocky \textbf{END} marker.
+   The heavy vertical lines represent the measures defined by the
+   configuration for the pattern.
+   \index{pattern!end marker}
+   Also note that the end of the pattern
+   occurs at a measure, and is marked by a blocky \textbf{END} marker.
 
    \itempar{Virtual Keyboard}{piano roll!virtual keyboard}
    The virtual keyboard is a fairly powerful interface.  It shows,
@@ -286,16 +318,19 @@
 
    \itempar{Notes}{piano roll!notes}
    Musical notes are indicated by short bars.  The bars provide a visual
-   representation of the pitch of the note and the length of the notes
+   representation of the pitch of the note and the length of the notes.
 
    \itempar{Events}{piano roll!events}
-   The small (just a few pixels high) Events windows shows discrete events,
-   such as Note On and Note Off and their velocities, or various control and
-   their values.
+   \index{events strip}
+   The small (just a few pixels high) events strip shows discrete events,
+   such as Note On and Note Off and their velocities, or various Controller
+   items and their values.  We recommend not trying to edit or select events
+   in that pane.
 
    \itempar{Event Values}{piano roll!event values}
    The events values for the currently selected category of events are shown
    in this window as vertical lines of a height proportional to the value.
+   These values can be easily modified.
 
 \subsubsection{Pattern Editor / Event Editing}
 \label{subsubsec:seq24_pattern_editor_event_editing}
@@ -309,17 +344,26 @@
    We've found that a good solution is to use a four-button USB trackball
    configued with an easy middle-button setup.
    It's easier than a touchpad, anyway.
+   See the comments at the beginning of this section, too.
 
    Note that, if only a middle-button is needed, ctrl-left-button will
    simulate that button.
 
+\paragraph{Editing Note Events}
+\label{paragraph:seq24_pattern_editor_note_events}
+
+   The Roll pane provides for a quite sophisticated set of note-editing
+   actions.  Please study the following paragraphs carefully, ideally while
+   trying them out in \textsl{Seq24}.
+
    \index{pattern editor!right click hold}
-	On both the note (grid) window and the event window, \textbf{holding}
+   \index{draw mode}
+	In the note (grid/roll) panel, \textbf{holding}
 	down the \textbf{right} mouse button will change the cursor
-	to a pencil and put the editor into 'draw' mode.
+	to a pencil and put the editor into "draw" mode.
    
    \index{pattern editor!left click right hold}
-   Then while still \textbf{holding} the \textbf{right} mouse button, click
+   Then, while still \textbf{holding} the \textbf{right} mouse button, click
    the \textbf{left} mouse button to \textbf{insert} new notes.  Many people
    find this combination strange at first, but once one gets used to it, it
    becomes a very fast method of note manipulation.
@@ -330,11 +374,14 @@
    \index{auto-notes}
    Note that, if one keeps dragging the mouse past the duration of a
    \index{beat unit}
-   beat unit (e.g. a quarter note), then multiple notes are drawn, each one
-   being the duration of a beat unit.  This auto-note facility can be
-   convenient.  However, if one wants a single long note, first draw the
-   short note, and then use the operation described in the next paragraph to
-   change the length of the note.
+   beat unit (e.g. a quarter note), then \textsl{multiple} notes are drawn,
+   each one being the duration of a beat unit.  This \textsl{auto-note}
+   facility can be convenient.
+   
+   However, if one wants a \textsl{single long note}, first draw the
+   short note, and then use one of the operations described in the next
+   paragraph to change the length of the note.  These operations also caused
+   the note to be selected.
 
    \index{pattern editor!ctrl left click}
    \index{pattern editor!middle click}
@@ -351,42 +398,21 @@
 	The \textbf{left} mouse button lets you select multiple events 
    which can then be clicked and moved,
    \index{pattern editor!cut}
-   \index{keys!ctrl-x}
-   cut (\texttt{Ctrl-X}), 
+   \index{keys!ctrl-x} cut (\texttt{Ctrl-X}), 
    \index{pattern editor!copy}
-   \index{keys!ctrl-c}
-   copy (\texttt{Ctrl-C}),
+   \index{keys!ctrl-c} copy (\texttt{Ctrl-C}),
    \index{pattern editor!paste}
-   \index{keys!ctrl-v}
-   or pasted (\texttt{Ctrl-V}).
+   \index{keys!ctrl-v} or pasted (\texttt{Ctrl-V}).
    When the notes are selected,
    \index{pattern editor!delete}
-   \index{keys!del}
-   you can delete them with the \texttt{Delete} key.
+   \index{keys!del} you can delete them with the \texttt{Delete} key.
+
+   \index{ctrl left click drag}
+   Pressing the \texttt{Ctrl} while left-click+dragging lets one
+   make additional selections of multiple events and notes.
 
    For the appearance of selected events (orange), see
    \figureref{fig:pattern_editor_selected_events}.
-
-	Left-click or right-click on events in the event strip (directly under
-	the piano roll grid) will allow you to add/select/move 
-	MIDI events (including note on/off messages) somewhat like the 
-	piano grid.
-
-	The event value (data) editor (directly under the event strip) is used 
-	to change note velocities, channel pressure, control codes,
-	patch select, etc.
-   \index{event data editor!draw}
-   \index{event data editor!left click}
-   \index{event data editor!right click}
-   \index{event data editor!middle click}
-   Just left-click+drag the mouse across the window to draw a line.  The
-   values will match that line.  
-   middle-click+drag and right-click+drag also
-   draw the value line.
-   
-   \index{event data editor!mouse wheel}
-   Any events that are selected in the paino
-   roll or event strip can have their values modified with the mouse wheel.
 
 \begin{figure}[H]
    \centering 
@@ -406,6 +432,9 @@
    \index{left click drag}
    Note that pressing the left mouse button and dragging also lets one
    select multiple events and notes.
+   \index{ctrl left click drag}
+   Pressing the \texttt{Ctrl} while left-click+dragging lets one
+   make additional selections of multiple events and notes.
 
    The \textbf{Tools} button described in
    \sectionref{subsec:seq24_pattern_editor_second} can also be used to
@@ -457,6 +486,67 @@
    \index{keys!del}
    you can delete them with the \texttt{Delete} key.
 
+\paragraph{Editing Other Events}
+\label{paragraph:seq24_pattern_editor_other_events}
+
+%  Left-click or right-click on events in the event strip (directly under
+%  the piano roll grid) will allow you to add/select/move 
+%  MIDI events (including note on/off messages) somewhat like the 
+%  piano grid.
+
+   \index{event strip}
+   Note On and Note Off events appear as small squares in the event strip,
+   along with a black vertical bar with a height proportional to the
+   velocity of the note event, plus a numeric representation of that value.
+   Note events do not need to be inserted in the event strip.
+   (\textsl{Note events can be inserted there, but they end up as short
+   events of the lowest possible note, 0 or C1, and they don't have a Note
+   Off event.  So don't do that!})
+
+   Other events can be inserted via the event strip.  To do that, first
+   select the kind of event to insert using the \textbf{Event} button in the
+   bottom panel.  The place the mouse cursor in the event strip.
+   Right-click to make the drawing pencil appear at the exact spot where the
+   event must go.  While holding the right button, click the left button.
+   A small square for the event should appear.
+
+   Should one want more of the same event, continue to hold both buttons and
+   drag the mouse.  One event should appear at each beat position (e.g. at
+   each 16th note position) that is crossed.
+
+   To move the event(s) to a different spot, select it or them via the left
+   button.  Then drag it or them to where one wants them.
+   \index{todo!high precision events}
+   \textsl{Note: it
+   is currently not possible to move them to positions smaller than the
+   beat size.  Is there a way to do it?}
+
+   Once the event positions are set, the next step is to modify the
+   data values of the events.
+
+   \index{event data}
+	The event value (data) editor (directly under the event strip) is used 
+	to change note velocities, channel pressure, control codes,
+	patch select, etc.
+   \index{event data editor!draw}
+   \index{event data editor!left click}
+   \index{event data editor!right click}
+   \index{event data editor!middle click}
+   Just left-click+drag the mouse across the window to draw a line.  The
+   values will match that line.  
+   middle-click+drag and right-click+drag also
+   draw the value line.
+
+   \textbf{Bug:}
+   \index{bugs!event editing can fail}
+   Sometimes the editing of event values in the event data section will not work.
+   The workaround is to do a \texttt{Ctrl-A}, and the click in the roll
+   to deselect the selection; that makes the event value editing work again.
+   
+   \index{event data editor!mouse wheel}
+   Any events that are selected in the piano roll or event strip can have
+   their values modified with the mouse wheel.
+
 \subsection{Pattern Editor / Bottom Panel}
 \label{subsec:seq24_pattern_editor_bottom}
 
@@ -490,7 +580,7 @@
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=1.0]{pattern/event-context-menu.png}
+   \includegraphics[scale=0.75]{pattern/event-context-menu.png}
    \caption{Pattern Editor, Event Button Context Menu}
    \label{fig:pattern_editor_bottom_event_context_menu}
 \end{figure}
@@ -500,9 +590,7 @@
 
    These sub-menus can be modified, as far as we know, by editing
    the file \texttt{\$HOME/.seq24usr}, to make it match your instrument.
-
-   TODO: Eventually, this manual will provide a section on setting up that
-   file.
+   See \sectionref{sec:seq24_usr_file}.
 
    \itempar{Event Selection}{pattern editor!event selection}
    Shows the selection event, with its number shown in hexadecimal notation,
@@ -531,13 +619,20 @@
    will be quantized on the fly before saving it.
 
    \itempar{Vol}{pattern editor!vol}
-   This button allows controlling the volumen of the recording.
+   This button allows controlling the volume of the recording.
 
-   TODO: need a menu screen capture.
+\begin{figure}[H]
+   \centering 
+   \includegraphics[scale=0.75]{pattern/vol-context-menu.png}
+   \caption{Pattern Recording Volume Menu}
+   \label{fig:pattern_edit_recording_volume_menu}
+\end{figure}
 
    The values provided are:
    Free, Fixed 8, Fixed 7, Fixed 6, Fixed 5, Fixed 4, Fixed 3,
    Fixed 2, and Fixed 1.
+   TODO: \index{todo!explain recording volume}
+   We need to figure what these mean!
 
 %-------------------------------------------------------------------------------
 % vim: ts=3 sw=3 et ft=tex

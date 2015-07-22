@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-21
+% \update      2015-07-22
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -32,7 +32,7 @@
    bottom panel.  Note that the \textsl{Seq24} main menu is discussed in
    \sectionref{sec:seq24_menu}.
 
-\subsection{Patterns, Top Panel}
+\subsection{Patterns / Top Panel}
 \label{subsec:seq24_patterns_panel_top}
 
    The top panel of the Pattern window is simple, consisting of the name of
@@ -58,8 +58,8 @@
    the song through the various patterns.  For short patterns, the progress
    is fast.  For patterns that last longer, the progress is slow.
    This field shows that something is going on, but that is about as useful
-   as it gets.  Note that the individual loops/patterns have their own
-   moving progress cursor, a tall thin line in each box.
+   as it gets.  Note that the individual pattern boxes in the main panel
+   have their own moving progress cursor, a tall thin line in each box.
 
    \itempar{Mute Group Learn}{pattern!mute group learn}
    \index{"L" button}
@@ -85,7 +85,7 @@
 	There are also keys assigned to turn on/off the group 
 	functionality.
 
-\subsection{Patterns, Main Panel}
+\subsection{Patterns / Main Panel}
 \label{subsec:seq24_patterns_panel_main}
 
    The main panel of the Patterns window provides a grid of empty boxes.
@@ -127,7 +127,7 @@
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=1.0]{pattern/pattern-empty-right-click-menu.png}
+   \includegraphics[scale=0.75]{pattern/pattern-empty-right-click-menu.png}
    \caption{Empty Pattern, Right-Click Menu}
    \label{fig:pattern_window_empty_right_click}
 \end{figure}
@@ -146,7 +146,7 @@
    pattern, and brings up the Pattern Editor
    so that one can fill in the new pattern.
 
-   \itempar{New}{pattern!paste}
+   \itempar{Paste}{pattern!paste}
    Pastes a loop or pattern that was previously copied.
 
    \itempar{Song / Mute All Tracks}{pattern!mute all}
@@ -178,7 +178,7 @@
          This pair of numbers shows the starting measure of the pattern and
          the measure just after the end of the pattern.
          For example, "0-2" means one measure, and it is the first measure.
-         (TODO:  verify this conjecture)
+         \index{todo!verify span conjecture} (TODO:  verify this span conjecture)
       \item \textbf{Beat}.
          \index{pattern!beat}
          This pair of numbers is the standard time-signature of the pattern,
@@ -189,11 +189,14 @@
          then the key noted in the lower-right corner of the pattern can be
          pressed to toggle the mute/unmute status of that pattern.
          This action is an alternative to left-clicking on the pattern.
+      \item \textbf{Progress Cursor}.
+         At the left of each box is a vertical line, waiting for playback to
+         start so that it can move through the pattern, again and again.
    \end{itemize}
 
    \index{pattern!left click}
-   Right-clicking on an already-filled box will toggle the status of the
-   pattern between mute (black?) and unmuted (white?).
+   Left-clicking on an already-filled box will toggle the status of the
+   pattern between muted (black) and unmuted (white).
 
    \index{pattern!right click}
    By right-clicking on an already-filled box, one brings up a menu
@@ -207,7 +210,8 @@
    \label{fig:pattern_window_right_click}
 \end{figure}
 
-   Here one can select the MIDI bus/channel.
+   Here one can choose to edit the pattern, cut and copy the pattern,
+   set the MIDI bus/channel, and more.
    One can also clear all performance data for the pattern.
    
    \begin{enumber}
@@ -224,6 +228,7 @@
    Edits an existing loop or pattern.
    Clicking this menu entry brings up the Pattern Editor
    so that one can modify the existing pattern.
+   See \figureref{fig:pattern_edit_window}.
 
    \itempar{Cut}{pattern!cut}
    Deletes and copies an existing loop or pattern.
@@ -236,6 +241,7 @@
    \itempar{Copy}{pattern!copy}
    Copies an existing loop or pattern.
    The pattern can then be pasted elsewhere in the Patterns panel.
+   See \sectionref{subsubsec:seq24_patterns_pattern_slot}.
 
    \itempar{Song}{pattern!song}
    Clicking this menu entry brings up a small popup menu:
@@ -262,7 +268,8 @@
 
    \itempar{Mute All Tracks}{pattern!mute all tracks}
    Selecting this filled-box right-click menu item causes...
-   TODO.  Cannot yet see that this does anything, NEEDS EXPERIMENTATION.
+   TODO.  \index{todo!how mute all tracks works}
+   Cannot yet see that this does anything, NEEDS EXPERIMENTATION.
 
    \itempar{Midi Bus}{pattern!midi bus}
    Selecting this filled-box right-click menu item brings up a list
@@ -270,17 +277,17 @@
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=1.0]{pattern/pattern-menu-midi-bus.png}
-   \caption{Existing Pattern, Right-Click Menu, MIDI Bus}
+   \includegraphics[scale=0.75]{pattern/pattern-menu-midi-bus.png}
+   \caption{Existing Pattern, Right-Click Menu, MIDI Output Busses}
    \label{fig:pattern_window_right_click_midi_bus}
 \end{figure}
 
-   For each of these bus items, another pop-up menu allows one
-   to specify the MIDI output port for that bus:
+   For each of these buss items, another pop-up menu allows one
+   to specify the MIDI output port for that buss:
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=1.0]{pattern/pattern-menu-midi-bus-numbers.png}
+   \includegraphics[scale=0.75]{pattern/pattern-menu-midi-bus-numbers.png}
    \caption{Existing Pattern, Right-Click Menu, MIDI Bus Ports}
    \label{fig:pattern_window_right_click_midi_bus_numbers}
 \end{figure}
@@ -317,7 +324,8 @@
    \texttt{]} keys on the keyboard
    switch between sets.
 
-   We're not sure about the functionality of the next keys.  The handling of
+   We're not sure about the functionality of the key sequences involving the 
+   \texttt{Alt} key.  The handling of
    \texttt{Alt} is generally taken over by the window manager.
 
    \index{keys!alt}
@@ -330,16 +338,20 @@
    lifting \texttt{Alt}.  Not yet sure exactly what this means.
 
    \index{keys!right ctrl}
+   \index{queue!temporary}
 	Holding \texttt{Right Ctrl} will queue a on/off toggle for a 
-	sequence when the loop ends. Queue also works for mute/unmute 
+	sequence when the loop ends. This is the "temporary queue" functionality.
+   Queue also works for mute/unmute 
 	patterns (groups); in this case every sequence will toggle 
 	its status after its individual loop end. 
 
    \index{keys!backslash}
-	Pressing the 'keep queue' key (by default, the backslash key)
+   \index{queue!permanent}
+   \index{queue!keep queue}
+	Pressing the "keep queue" key (by default, the backslash key)
    assigned in the \textsl{~/.seq24rc} file
 	activates permanent queue mode until you use the temporary 
-	Queue function again pressing \texttt{Right Ctrl}. 
+	queue function again pressing \texttt{Right Ctrl}. 
 
 \paragraph{Pattern Clicks}
 \label{paragraph:seq24_patterns_pattern_Clicks}
@@ -354,17 +366,25 @@
 
    \index{pattern!left ctrl left click}
    \index{keys!left ctrl}
-   Holding down \texttt{Left Ctrl} while selecting a sequence (pattern)
-   will mute all other patterns and turn on the selected
+   Holding down \texttt{Left Ctrl} while selecting a patter
+   with a left click will mute all other patterns and turn on the selected
    pattern.
 
    \index{pattern!left click-drag}
-   By clicking and holding the left button on a sequence,
+   By clicking and holding the left mouse button on a pattern,
    one can drag it to a new location on the grid.  The box
    will disappear while dragged, and reappear in the new location when
    dropped.
 
-\subsection{Patterns, Bottom Panel}
+   \index{pattern!right click}
+   Right-clicking a pattern will bring up the appropriate context menus, as
+   discussed earlier, depending on whether the pattern box is empty or
+   filled.
+
+   \index{pattern!middle click}
+   Middle-click does nothing when the mouse rests inside a pattern box.
+
+\subsection{Patterns / Bottom Panel}
 \label{subsec:seq24_patterns_panel_bottom}
 
    The bottom panel of the Patterns window provides way to control the
@@ -388,33 +408,30 @@
 
    \setcounter{ItemCounter}{0}      % Reset the ItemCounter for this list.
 
-   \itempar{Stop}{song!stop}
-   The red button stops the playback of the song and all its loops/patterns.
+   \itempar{Stop}{pattern!stop}
+   The red squarebutton stops the playback of the song and all its patterns.
    It is not clear if it also sends MIDI Off messages on all notes.
    \index{keys!esc (stop)}
    The keystroke for stopping playback is the \texttt{Escape} character.
 
-   \itempar{Play}{song!Play}
-   Starts the playback of the whole song.
+   \itempar{Play}{pattern!Play}
+   The green triangular button starts the playback of the whole song.
    \index{keys!space (play)}
    The keystroke for starting playback is the \texttt{Space} character.
 
-   \itempar{bpm}{song!bpm}
+   \itempar{bpm}{pattern!bpm}
    The spin widget adjusts the "Beats Per Minute" or BPM value.  The
    range of this field is from 20 bpm to 500 bpm, with a default value of
    120 bpm.
    Although this field looks editable, it is not.  Most keystrokes
    that are entered actually toggle one of the pattern boxes.
+   However, the following keys can also modify the BPM in small increments:
+   \index{keys!semicolon} The \textbf{semicolon} reduces the BPM;
+   \index{keys!apostrophe} The \textbf{apostrophe} increases the BPM.
 
-   \itempar{Name}{song!set name}
+   \itempar{Name}{pattern!set name}
    Each of the 32 available screen sets can be given a name by entering it
    into this field.
-
-   \itempar{Set}{song!set number}
-   This spin widget selects the current screen set.  The values in this
-   field range from 0 to 31, and default to 0.
-   Although this field looks editable, it is not.  Most keystrokes
-   that are entered actually toggle one of the pattern boxes.
 
    \textbf{Bug:}
    \index{bugs!set name has side-effect}
@@ -422,6 +439,19 @@
    will affect the panel window, causing playback to start and pattern
    boxes to be toggled!
 
+   \itempar{Set}{pattern!set number}
+   This spin widget selects the current screen set.  The values in this
+   field range from 0 to 31, and default to 0.
+   Although this field looks editable, it is not.
+
+   \textbf{Bug:}
+   \index{bugs!set number has side-effect}
+   While one is typing in the number of the set in this field, the keystrokes
+   will affect the panel window as well.
+
+   \itempar{Toggle Song Editor}{pattern!toggle song editor}
+   Pressing this button toggles the presence on-screen of the Song
+   Editor.
 
 %-------------------------------------------------------------------------------
 % vim: ts=3 sw=3 et ft=tex

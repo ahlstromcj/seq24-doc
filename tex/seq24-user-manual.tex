@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-21
+% \update      2015-07-22
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -55,7 +55,7 @@
    a live-looping sequencer with an interface more like a hardware sequencer
    than the typical software MIDI sequencer.  The contents of this document
    are derived in part from existing documents, such as the \texttt{SEQ24}
-   file shipped with the Seq24 source code, and a printout from a
+   file shipped with the \textsl{Seq24} source code, and a printout from a
    long-lost wiki.
 
    \textsl{Seq24} is not a synthesizer.  One needs hardware synthesizer, or
@@ -72,7 +72,7 @@
    which, for some, is a very intuitive and fast way to do MIDI.
    If one has worked with trackers like \textsl{SoundTracker} and
    \textsl{ShakeTracker}, then "you are a tracker guy and it gonna go fast".
-   With \textsl{Seq24}, one creates several patterns, and then combine them.
+   With \textsl{Seq24}, one creates several patterns, and then combines them.
 
    There are a number of current authors of \texttt{Seq24} today,
    as one can see in
@@ -82,14 +82,28 @@
    The original author is Rob C. Buse; where the word "I" occurs, that is
    probably him.
 
+   Now, unfortunately, \textsl{Seq24} is not currently under active
+   development (2010 seems to be the last update).  There are a number of
+   half-hearted forks for it on \textsl{GitHub}, including some conversions
+   to Java-based and browser-based code.  One of the fork consists of some
+   patches for LASH support, which should be incorporated at some point.
+   \textsl{Seq24} could use a few more features, such as "infinite
+   patterns" (i.e. tracks), better annunciation of mouse modes,
+   ways to work around the need for two mice, a more up-to-date GUI,
+   a few bug fixes, fix the formating of out rc files,
+   and a way to edit parts of the MIDI file textually.
+
+   So, why would we bother with \textsl{Seq24}?  The next section answers,
+   in pretty much the original author's words.
+
+\subsection{Seq24: What and Why?}
+\label{subsec:introduction_seq24_vs_others}
+
    \begin{quotation}
       Written by Rob C. Buse.  I wrote this program to fill a
       hole.  I figure it would be a waste if I was the only one
       using it.  So, I released it under the GPL.
    \end{quotation}
-
-\subsection{Seq24: What and Why?}
-\label{subsec:introduction_seq24_vs_others}
 
    \texttt{Seq24} is a real-time MIDI sequencer. It was created to 
    provide a very simple interface for editing and playing 
@@ -167,7 +181,8 @@
 
    \index{tooltips}
    As with most user-interfaces, holding the mouse over any button for a
-   short period will let one view a short description of what it does.
+   short period will let one view a short description (tooltip)
+   of what it does.
 
    The \textsl{Seq24} program is basically a loop playing machine with a 
    simple interface.  Before we describe this interface, it is useful to
@@ -196,6 +211,10 @@
 % Configuration file
 
 \input{seq24_rc_file}
+
+% User file
+
+\input{seq24_usr_file}
 
 % Man page
 

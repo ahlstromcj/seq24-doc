@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-21
+% \update      2015-07-22
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -17,8 +17,8 @@
 \section{Concepts}
 \label{sec:concepts}
 
-   This section presents some useful concepts, while keeping them out of the
-   way.
+   This section presents some useful concepts and definitions of terms as
+   they are used in \textsl{Seq24}.
 
 \subsection{Concepts / Terms}
 \label{subsec:concepts_terms}
@@ -43,8 +43,9 @@
 
    \index{loop}
    \textsl{Loop}
-   is a synonym for \textsl{pattern}.
-   Each loop is represent by a box in the Patterns window.
+   is a synonym for \textsl{pattern} or \textsl{sequence}, when used
+   in existing \textsl{Seq24} documentation.
+   Each loop is represented by a box in the Patterns window.
 
 \subsubsection{Concepts / Terms / measures ruler}
 \label{subsubsec:concepts_terms_measures_ruler}
@@ -53,9 +54,10 @@
    The \textsl{measures ruler} is the bar at the top of the Song Editor
    arrangement window that shows the numbering of the measures in the song.
    Left and right markers can be dropped on this ruler to set durations to
-   be expanded or collapsed.
+   be played, looped, expanded, or collapsed.
 
    Note:
+   \index{bar indicator}
    The original \textsl{Seq24} documentation calls this item the
    \textsl{bar indicator}.
 
@@ -73,13 +75,17 @@
 \subsubsection{Concepts / Terms / pattern}
 \label{subsubsec:concepts_terms_pattern}
 
-   A \textsl{Seq24} \textbf{pattern}
+   A \textsl{Seq24} \textsl{pattern}
    \index{pattern}
    is a short unit of melody or rhythm in \textsl{Seq24},
    extending for a small number of measures (in most cases).
+   Each pattern is represented by a box in the Patterns window.
 
    Each pattern is editable on its own.  All patterns can be layed out in
    a particular arrangement to generate a more complex song.
+
+   \textsl{pattern} is a synonym for \textsl{loop} or \textsl{sequence}.
+   It is our preferred term.
 
 \subsubsection{Concepts / Terms / performance}
 \label{subsubsec:concepts_terms_performance}
@@ -92,12 +98,15 @@
 \subsubsection{Concepts / Terms / queue mode}
 \label{subsubsec:concepts_terms_queue_mode}
 
-   To be determined.
+   TODO:  \index{todo!queue definition}
+   We need to figure out what "queue" refers to in the documentation, what
+   do the "temporary queue" and "permanent queue" are, and what the "keep
+   queue" functionality is used for.
 
 \subsubsection{Concepts / Terms / screen set}
 \label{subsubsec:concepts_terms_screen_set}
 
-   The \textbf{screen set}
+   The \textsl{screen set}
    \index{screen set}
    is a set of patterns that fit within the 8x4 grid of loops/pattern in the
    Patterns panel.
@@ -110,7 +119,16 @@
    \index{sequence}
    \textsl{Sequence} seems to be
    another synonym for \textsl{pattern}, used in some of the \textsl{Seq24}
-   documentation.
+   documentation.  \textsl{Loop} is another synonym.
+   Each sequence is represented by a box in the Patterns window.
+
+\subsubsection{Concepts / Terms / snapshot}
+\label{subsubsec:concepts_terms_snapshot}
+
+   \index{snapshot}
+   TODO:  \index{todo!snapshot definition}  determine what exactly is a
+   \textsl{Seq24}
+   \textsl{snapshot}.
 
 \subsubsection{Concepts / Terms / song}
 \label{subsubsec:concepts_terms_song}
@@ -118,7 +136,6 @@
    \index{song}
    A \textsl{song} is a collection of patterns in a specific layout, as
    assembled via the Song Editor window.
-
 
 %-------------------------------------------------------------------------------
 % vim: ts=3 sw=3 et ft=tex

@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-21
+% \update      2015-07-22
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -38,7 +38,7 @@
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=1.0]{menu/menu_file.png}
+   \includegraphics[scale=0.75]{menu/menu_file.png}
    \caption{Seq24 File Menu Items}
    \label{fig:seq24_menu_file_items}
 \end{figure}
@@ -57,7 +57,9 @@
 \label{subsec:menu_file_new}
 
    The \textbf{New} menu entry clears out any current song and patterns,
-   along one to create news ones from scratch.
+   allowing one to create news ones from scratch.
+   If unsaved changes are pending, the user will be prompted to save the
+   changes.
 
 \subsubsection{Menu / File / Open}
 \label{subsubsec:seq24_menu_file_open}
@@ -67,20 +69,27 @@
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=0.50]{menu/menu_file_open.png}
+   \includegraphics[scale=0.65]{menu/menu_file_open.png}
    \caption{File Open}
    \label{fig:seq24_menu_file_open}
 \end{figure}
 
-\subsubsection{Menu / File / Save (As)}
+   If unsaved changes are pending, the user will be prompted to save the
+   changes.
+
+\subsubsection{Menu / File / Save and Save As}
 \label{subsubsec:menu_file_open_save_as}
 
+   The \textbf{Save} menu entry saves the song under its current name.
+   If there is no current name, then
+   it opens up a standard GTK+ file dialog.
+
    The \textbf{Save As} menu entry saves a song under a different name.
-   It opens up a standard GTK+ file dialog.
+   It opens up the following standard GTK+ file dialog.
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=0.50]{menu/menu_file_save_as.png}
+   \includegraphics[scale=0.65]{menu/menu_file_save_as.png}
    \caption{File Save As}
    \label{fig:seq24_menu_file_save_as}
 \end{figure}
@@ -96,6 +105,7 @@
       myfile.midi: Standard MIDI data (format 1) using 16 tracks at 1/192
    \end{verbatim}
 
+   \index{todo!solve seq24 format}
    It looks like a simple MIDI file, and yet, if one re-opens it in
    \textsl{Seq24}, one sees that all of the labelling, pattern information,
    and song layout has been preserved in this file.
@@ -110,10 +120,6 @@
    \texttt{contrib/b4uacuse-seq24.midi}.  The latter is a lot
    bigger.  
 
-   The \textbf{Save} menu entry saves the song under its current name.
-   If there is no current name, then
-   it opens up a standard GTK+ file dialog.
-
 \subsubsection{Menu / File / Import}
 \label{subsubsec:seq24_menu_file_import}
 
@@ -122,7 +128,7 @@
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=0.75]{menu/menu_file_import.png}
+   \includegraphics[scale=0.65]{menu/menu_file_import.png}
    \caption{File Import}
    \label{fig:seq24_menu_file_import}
 \end{figure}
@@ -136,8 +142,8 @@
 
 \begin{figure}[H]
    \centering 
-   \includegraphics[scale=0.50]{menu/imported_midi_song.png}
-   \caption{File Import}
+   \includegraphics[scale=0.90]{menu/imported_midi_song.png}
+   \caption{Imported MIDI Song}
    \label{fig:seq24_imported_midi_song}
 \end{figure}
 
@@ -149,22 +155,23 @@
 \subsubsection{Menu / File / Options}
 \label{subsubsec:seq24_menu_file_options}
 
-   This menu provides a number of settings in one tabbed dialog, shown in
-   the figure below.
-   This window allows us to select which sequence gets the MIDI
-   clock, and which incoming MIDI events control the sequencer.
+   The \textbf{Options} menu item provides a number of settings in one
+   tabbed dialog, shown in the figure below.
+   This dialog allows one to select which sequence gets the MIDI
+   clock, which incoming MIDI events control the sequencer, what keys are
+   mapped to functions, how the mouse works, and some JACK parameters.
 
 \paragraph{Menu / File / Options / MIDI Clock}
 \label{paragraph:seq24_menu_file_options_midi_clock}
 
-   Provides a way to send the MIDI clock to one or more of the
-   \textsl{Seq24} output busses.
+   The \textbf{MIDI Clock} tab provides a way to send the MIDI clock to one
+   or more of the \textsl{Seq24} output busses.
    It is used to configure to what busses the MIDI clock gets dumped.
 
 \begin{figure}[H]
    \centering 
    \includegraphics[scale=0.75]{menu/menu_file_options_midi_clock.png}
-   \caption{File Options MIDI Clock}
+   \caption{File / Options / MIDI Clock}
    \label{fig:seq24_menu_file_options_midi_clock}
 \end{figure}
 
@@ -205,39 +212,48 @@
    This value starts at 1 and ranges on upward to 16384.
    It  defaults to 64.
    It is used by the \textbf{On (Mod)} setting discussed above.
+   It is the \texttt{[midi-clock-mod-ticks]} option in the \textsl{Seq24}
+   "rc" file as described in
+   \sectionref{subsec:seq24_rc_file_other_midi}.
+
 
 \paragraph{Menu / File / Options / MIDI Input}
 \label{paragraph:seq24_menu_file_options_midi_input}
 
-   The only item in this tab is the single MIDI input buss provided
-   by \textsl{Seq24}:  \textbf{[0] seq24 0}.
+   The only item in the \textbf{MIDI Input} tab is the single MIDI input
+   buss provided by \textsl{Seq24}:  \textbf{[0] seq24 0}.
 
 \begin{figure}[H]
    \centering 
    \includegraphics[scale=0.75]{menu/menu_file_options_midi_input_condensed.png}
-   \caption{File Options MIDI Input (Condensed View)}
+   \caption{File / Options / MIDI Input (Condensed View)}
    \label{fig:seq24_menu_file_options_midi_input}
 \end{figure}
 
-   This item, if checked allows \textbf{Seq24} to be used to record MIDI
+   This item, if checked allows \textsl{Seq24} to be used to record MIDI
    information from another source, or pass it through to the output busses
-   that are configured to allow pass-through.
+   that are configured
+   to allow pass-through
+   (in the Pattern Editor, as discussed in 
+   \sectionref{subsec:seq24_pattern_editor_bottom}.)
 
 \paragraph{Menu / File / Options / Keyboard }
 \label{paragraph:seq24_menu_file_options_keyboard}
 
-   \textsl{Seq24}, as befits a professional product, allows extensive use of
+   \textsl{Seq24}, as befits a good product, allows extensive use of
    keyboard shortcuts to make operations go faster than when using a mouse.
+   The \textbf{Keyboard} tab allows for the configuration of these keyboard
+   shortcuts.
 
 \begin{figure}[H]
    \centering 
    \includegraphics[scale=0.75]{menu/menu_file_options_keyboard.png}
-   \caption{File Options Keyboard}
+   \caption{File / Options / Keyboard}
    \label{fig:seq24_menu_file_options_keyboard}
 \end{figure}
 
-   We won't attempt to cover every user-interface item in this dialog, just
-   the categories.
+   We won't attempt to cover every user-interface item in this busy
+   dialog, just the categories.
 
    \begin{enumber}
       \item \textbf{Show key labels on sequences}
@@ -271,7 +287,7 @@
       \item \textbf{bpm up}.
          Key: \index{keys!apostrophe} \textbf{apostrophe}.
       \item \textbf{bpm down}.
-         Key: \index{keys!;} \textbf{semicolon}.
+         Key: \index{keys!semicolon} \textbf{semicolon}.
       \item \textbf{Replace}.
          Key: \index{keys!ctrl-l} \textbf{Control\_L}.
       \item \textbf{Queue}.
@@ -294,9 +310,11 @@
    various keys that can be used, especially keys used with the
    \texttt{Ctrl} key.
 
-   TODO: One thing we need to figure out is just what this "snapshot"
-   feature provides.  Another thing is the "queue" and "keep queue"
-   features.
+   TODO:  \index{todo!snapshot definition}
+   One thing we need to figure out is just what this "snapshot"
+   feature provides.
+   \index{todo!keep queue}
+   Another thing is the "queue" and "keep queue" features.
 
    \itempar{Sequence toggle keys}{keyboard!sequence toggle keys}
    Each of these keys toggles the playing/muting of one of the 32
@@ -310,8 +328,9 @@
    and can also be shown in each loop/pattern box.  No need to list them all
    here!
 
-   TODO: One thing we need to discover is just what this mute-grouping
-   means.
+   TODO: \index{todo!mute-group}
+   One thing we need to discover is just what this mute-grouping
+   means functionally.
 
    \itempar{Learn}{keyboard!learn}
    Learn (while pressing a mute-group key).
@@ -319,11 +338,13 @@
    It is the \textbf{Insert} key by default.
 
    \itempar{Disable}{keyboard!disable}
-   TODO: What gets disabled?
+   TODO: \index{todo!keyboard disable} What gets disabled?
+   \index{keys!apostrophe}
    It is the \textbf{apostrophe} key by default.
 
    \itempar{Enable}{keyboard!enable}
    TODO: What gets enabled?
+   \index{keys!igrave}
    It is the \textbf{igrave} (back-tick) key by default.
 
    There is much to learn about this learn/enable/disable triad!
@@ -336,7 +357,7 @@
 \begin{figure}[H]
    \centering 
    \includegraphics[scale=0.75]{menu/menu_file_options_mouse_condensed.png}
-   \caption{File Options Mouse (Condensed View)}
+   \caption{File / Options / Mouse (Condensed View)}
    \label{fig:seq24_menu_file_options_mouse}
 \end{figure}
 
@@ -369,7 +390,7 @@
 \begin{figure}[H]
    \centering 
    \includegraphics[scale=0.75]{menu/menu_file_options_jack_sync.png}
-   \caption{File Options Jack Sync}
+   \caption{File / Options / Jack Sync}
    \label{fig:seq24_menu_file_options_jack_sync}
 \end{figure}
 
@@ -405,7 +426,7 @@
       \item \textbf{Live Mode}.
          \index{JACK!live mode}
          Playback will be in live mode.  Use this option to allow muting and
-         unmuting of loops.
+         unmuting of patterns.
       \item \textbf{Song Mode}.
          \index{JACK!song mode}
          Playback will use only the Song Editor's data.
@@ -423,6 +444,7 @@
    This menu item has only one entry, \textbf{Song Editor}, 
    which is already covered by a button at the bottom of the Patterns
    window.  Selecting this item bring up the Song Editor window.
+   See \figureref{fig:song_editor_window}
 
 \subsection{Menu / Help About...}
 \label{subsec:seq24_menu_about}
@@ -457,7 +479,7 @@
 \end{figure}
 
    Shows who has documented this project.  Say, maybe "we" can get "our"
-   name their someday!  :-)
+   name there someday!  \texttt{:-)}
 
 
 %-------------------------------------------------------------------------------
