@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-22
+% \update      2015-07-27
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -173,16 +173,16 @@
          tracks the position of the playback of the pattern or loop; it
          returns to the beginning of the box every time that pattern starts
          over again.
-      \item \textbf{Span}.
-         \index{pattern!span}
-         This pair of numbers shows the starting measure of the pattern and
-         the measure just after the end of the pattern.
-         For example, "0-2" means one measure, and it is the first measure.
-         \index{todo!verify span conjecture} (TODO:  verify this span conjecture)
+      \item \textbf{Bus-Channel}.
+         \index{pattern!bus-channel}
+         This pair of numbers shows the the MIDI buss number, a dash, and
+         the MIDI channel number.
+         For example, "0-2" means MIDI buss 0, channel 2.
       \item \textbf{Beat}.
          \index{pattern!beat}
          This pair of numbers is the standard time-signature of the pattern,
-         such as "4/4" or "3/4".
+         such as "4/4" or "3/4".  The first number is the beats-per-measure,
+         and the second is the size of the beat, here, a quarter note.
       \item \textbf{Shortcut Key}.
          If the display of shortcut keys is enabled (see
          \sectionref{paragraph:seq24_menu_file_options_keyboard}),
@@ -366,7 +366,7 @@
 
    \index{pattern!left ctrl left click}
    \index{keys!left ctrl}
-   Holding down \texttt{Left Ctrl} while selecting a patter
+   Holding down \texttt{Left Ctrl} while selecting a pattern
    with a left click will mute all other patterns and turn on the selected
    pattern.
 
@@ -426,8 +426,8 @@
    Although this field looks editable, it is not.  Most keystrokes
    that are entered actually toggle one of the pattern boxes.
    However, the following keys can also modify the BPM in small increments:
-   \index{keys!semicolon} The \textbf{semicolon} reduces the BPM;
-   \index{keys!apostrophe} The \textbf{apostrophe} increases the BPM.
+   \index{keys!semicolon} The \texttt{semicolon} reduces the BPM;
+   \index{keys!apostrophe} The \texttt{apostrophe} increases the BPM.
 
    \itempar{Name}{pattern!set name}
    Each of the 32 available screen sets can be given a name by entering it
