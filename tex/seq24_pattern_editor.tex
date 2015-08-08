@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-22
+% \update      2015-08-08
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -148,7 +148,7 @@
 \begin{figure}[H]
    \centering 
    \includegraphics[scale=0.75]{pattern/tools-first-menu.png}
-   \caption{Tools Context Menu}
+   \caption{Tools, Context Menu}
    \label{fig:pattern_editor_tools_first_menu}
 \end{figure}
 
@@ -191,16 +191,49 @@
    strict form of quantization.
    TODO: \index{"todo!what is tighten"} Need more information about this.
 
-   $\bullet$ \textbf{Modify Pitch} has only one entry,
-   \textbf{Transpose Selected},
-   which brings up the following sub-menu:
+   $\bullet$ \textbf{Modify Pitch} has only one entry by default,
+   \textbf{Transpose Selected} (not shown).
+   Selecting the \textbf{Transpose Selected} entry
+   brings up the following sub-menu:
 
 \begin{figure}[H]
    \centering 
    \includegraphics[scale=0.75]{pattern/tools-transpose-selected-menu.png}
-   \caption{Tools Transpose Selected Values}
+   \caption{Tools, Transpose Selected Values}
    \label{fig:pattern_editor_tools_transpose_selected_menu}
 \end{figure}
+
+   $\bullet$ If the user has selected a
+   \textbf{Musical Scale} setting other than \textbf{Off},
+   then \textbf{Modify Pitch} has two entries:
+   \textbf{Transpose Selected}, discussed above, plus
+   another sub-menu,
+   \textbf{Harmonic Transpose Selected}, which makes sure that all
+   transpositions stay on the selected scale.
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[scale=0.75]{pattern/tools-transpose-and-harmonic-selected-menu.png}
+   \caption{Tools, Two "Transpose" Menus}
+   \label{fig:pattern_editor_tools_two_transpose_menus}
+\end{figure}
+
+   Remember that only the 
+   \textbf{Transpose Selected} entry is shown if the \textbf{Musical Scale}
+   setting is \textbf{Off}.
+
+   Selecting the \textbf{Harmonic Transpose Selected} entry brings up the
+   following sub-menu:
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[scale=0.75]{pattern/tools-harmonic-transpose-selected-menu.png}
+   \caption{Tools, Harmonic Transpose Selected Values}
+   \label{fig:pattern_editor_tools_harmonic_transpose_menu}
+\end{figure}
+
+   Again, the harmonic-transpose option will not be available unless a scale
+   has been selected.
 
    \itempar{Grid Snap}{pattern editor!grid snap}
    Grid snap selects where the notes will be drawn.
@@ -234,7 +267,18 @@
    One can select which \textbf{Musical Scale} and
    \textbf{Key} the piece is in,
    and \textsl{Seq24} will grey out those keys on the piano-roll that
-   are not in the key.
+   are \textsl{not} in the key.
+   This effect is shown for the C Major scale in the following figure:
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[scale=0.75]{pattern/major-scale-masking.png}
+   \caption{C Major Scale Masking}
+   \label{fig:pattern_editor_major_scale_masking}
+\end{figure}
+
+   This feature makes it a bit easier to stay in key while playing and
+   recording.
 
    \itempar{Background Sequence}{pattern editor!background sequence}
    One can select another pattern to draw on the background to help with

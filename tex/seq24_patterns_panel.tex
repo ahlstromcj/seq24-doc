@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-27
+% \update      2015-07-28
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -173,6 +173,10 @@
          tracks the position of the playback of the pattern or loop; it
          returns to the beginning of the box every time that pattern starts
          over again.
+         \textbf{Bug:}
+         \index{bugs!empty pattern scrolls}
+         However, an imported empty pattern will still (needlessly) scroll;
+         perhaps such patterns can be marked as inactive.
       \item \textbf{Bus-Channel}.
          \index{pattern!bus-channel}
          This pair of numbers shows the the MIDI buss number, a dash, and
@@ -374,7 +378,8 @@
    By clicking and holding the left mouse button on a pattern,
    one can drag it to a new location on the grid.  The box
    will disappear while dragged, and reappear in the new location when
-   dropped.
+   dropped.  However, note that a pattern cannot be dragged if its
+   Pattern Editor window is open.
 
    \index{pattern!right click}
    Right-clicking a pattern will bring up the appropriate context menus, as
