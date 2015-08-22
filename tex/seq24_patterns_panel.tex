@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-28
+% \update      2015-08-09
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -54,12 +54,16 @@
 
    \itempar{Song Progress}{pattern!progress}
    \index{song!progress}
-   This bar shows a number of small black cursors that show the progress of
-   the song through the various patterns.  For short patterns, the progress
-   is fast.  For patterns that last longer, the progress is slow.
-   This field shows that something is going on, but that is about as useful
-   as it gets.  Note that the individual pattern boxes in the main panel
-   have their own moving progress cursor, a tall thin line in each box.
+   \index{song!"main time"}
+   The \textbf{Song Progress} bar is also known as the "main time" bar.
+   This bar shows a number of small black cursors ("pills") that show the
+   progress of the song through the various patterns.  For short patterns,
+   the progress is fast.  For patterns that last longer, the progress is
+   slow.  This field shows that something is going on.  It can also indicate
+   the relative lengths of the various patterns.
+ 
+   Note that the individual pattern boxes in the main panel have their own
+   moving progress cursor, a tall thin line in each box.
 
    \itempar{Mute Group Learn}{pattern!mute group learn}
    \index{"L" button}
@@ -72,17 +76,17 @@
    hot-key for the "L" button.
 
    \index{group!toggle}
-	One can toggle the playing status of up to 32 previously 
-	defined mute/unmute patterns (groups) in the active screen 
-	set, similar to hardware sequencers. 
-	This toggling is done either by one of the \textsl{group toggle} keys 
+	One can toggle the playing status of up to 32 previously
+	defined mute/unmute patterns (groups) in the active screen
+	set, similar to hardware sequencers.
+	This toggling is done either by one of the \textsl{group toggle} keys
 	or by a MIDI controller, both assigned in the
-   \texttt{~/.seq24rc} file. 
-	A mute/unmute pattern (group) is stored by holding a 
+   \texttt{~/.seq24rc} file.
+	A mute/unmute pattern (group) is stored by holding a
    \index{group!learn}
    \textsl{group learn} key (\texttt{Insert} by default) while pressing the
-   corresponding \textsl{group toggle} key. 
-	There are also keys assigned to turn on/off the group 
+   corresponding \textsl{group toggle} key.
+	There are also keys assigned to turn on/off the group
 	functionality.
 
 \subsection{Patterns / Main Panel}
@@ -100,8 +104,8 @@
    \texttt{[} and
    \index{keys!]}
    \texttt{]} keys on the keyboard, or by using
-   the spin-widget-driven, labelled set.  
-   There are a total of 32 sets, for a total of 
+   the spin-widget-driven, labelled set.
+   There are a total of 32 sets, for a total of
    1024 loops/patterns. 
 
 \begin{figure}[H]
