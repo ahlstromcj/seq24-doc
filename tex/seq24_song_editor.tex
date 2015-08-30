@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-21
+% \update      2015-08-30
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -67,6 +67,8 @@
    Stops the playback of the song.
    \index{keys!esc (stop)}
    The keystroke for stopping playback is the 'Escape' character.
+   It can be configured to be another character (such as 'Space', which
+   would make the space-bar toggle the playback status.
 
    \itempar{Play}{song editor!play}
    \index{L marker}
@@ -139,16 +141,23 @@
 \label{subsec:seq24_song_editor_arrangement_panel}
 
    The arrangement panel is the middle section shown in
-   \figureref{fig:song_editor_window}.  Here, we zero in on its many
+   \figureref{fig:song_editor_window}.  It is also known as the
+   "piano roll" of the song editor. Here, we zero in on its many
    features.
 
-   The following figure is taken from a conventional MIDI file, with a few
-   long tracks, rather than a large number of smaller patterns.  In other
-   words, the patterns used here are very long, and used only once in the
-   song.
+   The following figure is taken from a conventional MIDI file, imported,
+   with a few long tracks, rather than a large number of smaller patterns.
+   In other words, the patterns used here are very long, and used only once
+   in the song.
    
    We might need to provide an example that shows off \textsl{Seq24}'s
    pattern features better, at some point.
+
+   Please note that, if playback is started with the Song Editor as the
+   active window, then the pattern boxes in the patterns panel will
+   show as armed/unarmed (unmuted/muted) depending upon whether or not the
+   pattern is shown as playing (or not) at the current playback position in
+   the Song Editor piano roll.
 
 \begin{figure}[H]
    \centering 
@@ -166,7 +175,7 @@
 
    \begin{enumber}
       \item \textbf{Patterns Column}
-      \item \textbf{Roll}
+      \item \textbf{Piano Roll}
       \item \textbf{Measures Ruler}
    \end{enumber}
 
@@ -205,7 +214,7 @@
 
    The patterns column shows a list of all of the patterns that have been
    created in the current song.  Each pattern in this list has a track of
-   pattern layouts associated with it in the Roll section.
+   pattern layouts associated with it in the piano roll section.
 
    \index{patterns column!left click}
    Left-clicking on the pattern name or the "M" button toggles the muting
@@ -218,13 +227,13 @@
    Recall that this context menu has the following entries:
    Edit..., Cut, Copy, Song, and Midi Bus.
 
-\subsubsection{Song Editor / Arrangement Panel / Roll}
+\subsubsection{Song Editor / Arrangement Panel / Piano Roll}
 \label{subsubsec:seq24_song_editor_arrangement_panel_roll}
 
-   The "Roll" section of the arrangement panel is where patterns or
+   The "Piano Roll" section of the arrangement panel is where patterns or
    subsections are inserted, deleted, shrunk, lengthened, or moved.
 
-   Here are the items to note in the Roll area:
+   Here are the items to note in the Piano Roll area:
 
    \begin{enumber}
       \item \textbf{Single}.
@@ -277,7 +286,7 @@
       \item \textbf{Expansion}.
          Originally, all the long patterns of this song were continuous.
          But, by setting the L and R markers, and using the \textbf{Expand}
-         button, we opened up some space in the song.
+         button, we opened up some silent space in the song.
    \end{enumber}
 
    The \textsl{Seq24} help files refer to work in the Song Editor as the

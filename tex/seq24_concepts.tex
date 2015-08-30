@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-22
+% \update      2015-08-30
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -26,6 +26,37 @@
    This section doesn't provide comprehensive coverage of terms.  It
    covers mainly terms that puzzled the author at first or that are
    necessary to understand the \textsl{Seq24} program.
+
+\subsubsection{Concepts / Terms / armed}
+\label{subsubsec:concepts_terms_armed}
+
+   \index{armed}
+   An armed sequence is a sequence that will be heard.
+   "Armed" is the opposite of "muted".
+   Performing an \textsl{arm} operation in \textsl{Seq24} means clicking on
+   an "unarmed" sequence in the patterns panel (the main window of
+   \textsl{Seq24}).  An unarmed sequence will not be heard, and it
+   has a white background.  When the sequence is \textsl{armed},
+   it will be heard, and it has a black background.
+
+   A sequence can be armed or unarmed in three ways:
+
+   \begin{itemize}
+      \item Clicking on the sequence/pattern box.
+      \item Pressing the hot-key for that sequence/pattern box.
+      \item Opening up the Song Editor and starting playback; the
+            sequences arm/unarm depending on the layout of the
+            sequences in the piano roll of the Song Editor.
+   \end{itemize}
+
+\subsubsection{Concepts / Terms / buss (bus)}
+\label{subsubsec:concepts_terms_buss}
+
+   \index{bus}
+   \index{buss}
+   A \textsl{buss} (also spelled "bus" these days) is an entity onto which
+   MIDI events can be placed, in order to be heard or to affect the
+   playback.
 
 \subsubsection{Concepts / Terms / group}
 \label{subsubsec:concepts_terms_group}
@@ -77,6 +108,7 @@
 
    A \textsl{Seq24} \textsl{pattern}
    \index{pattern}
+   (also called a "sequence" or "loop")
    is a short unit of melody or rhythm in \textsl{Seq24},
    extending for a small number of measures (in most cases).
    Each pattern is represented by a box in the Patterns window.

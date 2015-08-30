@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-08-09
+% \update      2015-08-30
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -24,6 +24,7 @@
 
    The \textsl{Seq24 Patterns Panel} is the main window of \textsl{Seq24}.
    See \figureref{fig:seq24_main_screen}.
+   It is also called the "main window" or the "patterns window".
    It is here one manages a set of patterns
    (see \sectionref{subsubsec:concepts_terms_screen_set}),
    manages the configuration, and opens the pattern or song editors.
@@ -63,7 +64,9 @@
    the relative lengths of the various patterns.
  
    Note that the individual pattern boxes in the main panel have their own
-   moving progress cursor, a tall thin line in each box.
+   moving progress cursor, a tall thin line in each box.  Unfortunately,
+   this bar moves along even in patterns that have no events, only meta
+   items such as the track name.
 
    \itempar{Mute Group Learn}{pattern!mute group learn}
    \index{"L" button}
@@ -92,11 +95,13 @@
 \subsection{Patterns / Main Panel}
 \label{subsec:seq24_patterns_panel_main}
 
-   The main panel of the Patterns window provides a grid of empty boxes.
-   Each box represents a loop or pattern.
-   One sees only 32 loops in the main panel.
+   The main panel of the Patterns window provides a grid of empty boxes,
+   each box delimited by brace-like lines at left and right.
+   Each filled box represents a loop or pattern.
+   One sees only 32 loops at a time in the main panel (but more 32
+   loops can be supported by \textsl{Seq24}.
    \index{screen set}
-   This is a screen set, as discussed in
+   This group of 32 loops is called a "screen set", as discussed in
    \sectionref{subsubsec:concepts_terms_screen_set}.
    One can switch between sets
    by using the
@@ -104,7 +109,7 @@
    \texttt{[} and
    \index{keys!]}
    \texttt{]} keys on the keyboard, or by using
-   the spin-widget-driven, labelled set.
+   the spin-widget-driven, labelled \textbf{Set} interface item.
    There are a total of 32 sets, for a total of
    1024 loops/patterns. 
 
@@ -155,7 +160,9 @@
 
    \itempar{Song / Mute All Tracks}{pattern!mute all}
    This item is the one item in the \textbf{Song} context menu;
-   it mutes all tracks (or loops/patterns?)
+   it mutes all tracks (or loops/patterns).  (We are not clear
+   on exactly what it does.  There is no change in visible
+   status of any of the patterns in the patterns-panel.)
 
 \subsubsection{Pattern}
 \label{subsubsec:seq24_patterns_pattern_filled}
@@ -203,8 +210,16 @@
    \end{itemize}
 
    \index{pattern!left click}
-   Left-clicking on an already-filled box will toggle the status of the
-   pattern between muted (black) and unmuted (white).
+   Left-clicking on an filled pattern box will toggle the status of the
+   pattern between muted (white background) and unmuted (black background).
+   If the song is playing via the main window, toggling this status makes
+   the pattern stop playing or start playing.  Note that the armed status
+   can also be toggled using hot-keys.
+
+   Also note that the pattern boxes will toggle between the muted/unmuted
+   states as the music plays, and the pattern is active or inactive at the
+   point of playback, if the Song Editor is the active window and was used
+   to start the playback.
 
    \index{pattern!right click}
    By right-clicking on an already-filled box, one brings up a menu
@@ -311,10 +326,13 @@
 \label{paragraph:seq24_patterns_pattern_keys}
 
    \index{keys!pattern toggles}
-   Hitting its assigned keyboard key will
-   also toggle its status.  Below is the grid that is
+   For each pattern, hitting its assigned keyboard key will
+   also toggle its status between muted/unmuted (armed/unarmed).
+   Below is the default grid that is
    mapped to the loops/patterns on the screen set.
-   This grid can be changed in the Keyboard options tab.
+   This grid can be changed in the Keyboard options tab, and is
+   saved in the \textsl{keyboard-control} section of the
+   \texttt{~/.seq24rc} file.
 
    \begin{verbatim}
      [ 1   ][ 2   ][ 3   ][ 4   ][ 5   ][ 6   ][ 7   ][ 8   ]
@@ -369,7 +387,7 @@
    Left-clicking on a pattern-filled box will change its state
    \index{pattern!mute}
    \index{pattern!unmute}
-   from muted (white) to playing (black) when
+   from muted (white background) to playing (black background) when
    the sequencer is running.
 
    \index{pattern!left ctrl left click}

@@ -6,11 +6,9 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-08-08
+% \update      2015-08-30
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
-%
-%     Provides the concepts.
 %
 %-------------------------------------------------------------------------------
 
@@ -41,7 +39,8 @@
 \subsection{Pattern Editor / First Panel}
 \label{subsec:seq24_pattern_editor_first}
 
-   The top bar of the Pattern (sequence) Editor lets you change the name of
+   The top bar (horizontal panel) of the Pattern (sequence) Editor
+   lets one change the name of
    the pattern, the time signature of the piece, how long the loop is, and
    some other configuration items.
 
@@ -97,8 +96,8 @@
 \subsection{Pattern Editor / Second Panel}
 \label{subsec:seq24_pattern_editor_second}
 
-   The second panel of the Pattern Editor provides a number of additional
-   settings.
+   The second horizontal panel of the Pattern Editor provides a number
+   of additional settings.
 
 \begin{figure}[H]
    \centering 
@@ -322,6 +321,10 @@
       xmodmap -e "pointer = 1 8 3 4 9 6 7 2 5 10 11"
    \end{verbatim}
 
+   Editing is much easier after making that setting.  (In a future
+   version of \textsl{Seq24}, we will add support for some of the
+   crappy trackpads we've encountered on various laptops.)
+
 \subsubsection{Pattern Editor / Piano Roll Items}
 \label{subsubsec:seq24_pattern_editor_piano_roll_items}
 
@@ -370,7 +373,7 @@
    The small (just a few pixels high) events strip shows discrete events,
    such as Note On and Note Off and their velocities, or various Controller
    items and their values.  We recommend not trying to edit or select events
-   in that pane.
+   in that pane, in general, but feel free to try it.
 
    \itempar{Event Values}{piano roll!event values}
    The events values for the currently selected category of events are shown
@@ -440,7 +443,7 @@
    current length, the note will end up "infinitely" long.
 
    \index{pattern editor!left click drag}
-	The \textbf{left} mouse button lets you select multiple events 
+	The \textbf{left} mouse button lets one select multiple events 
    which can then be clicked and moved,
    \index{pattern editor!cut}
    \index{keys!ctrl-x} cut (\texttt{Ctrl-X}), 
@@ -450,7 +453,8 @@
    \index{keys!ctrl-v} or pasted (\texttt{Ctrl-V}).
    When the notes are selected,
    \index{pattern editor!delete}
-   \index{keys!del} you can delete them with the \texttt{Delete} key.
+   \index{keys!del}
+   one can delete them with the \texttt{Delete} key.
 
    \index{ctrl left click drag}
    Pressing the \texttt{Ctrl} while left-click+dragging lets one
@@ -515,7 +519,7 @@
    current length, the note will end up "infinitely" long.
 
    \index{pattern editor!left click drag}
-	The \textbf{left} mouse button lets you select multiple events 
+	The \textbf{left} mouse button lets one select multiple events 
    which can then be clicked and moved,
    \index{pattern editor!cut}
    \index{keys!ctrl-x}
@@ -529,13 +533,13 @@
    When the notes are selected,
    \index{pattern editor!delete}
    \index{keys!del}
-   you can delete them with the \texttt{Delete} key.
+   one can delete them with the \texttt{Delete} key.
 
 \paragraph{Editing Other Events}
 \label{paragraph:seq24_pattern_editor_other_events}
 
 %  Left-click or right-click on events in the event strip (directly under
-%  the piano roll grid) will allow you to add/select/move 
+%  the piano roll grid) will allow one to add/select/move 
 %  MIDI events (including note on/off messages) somewhat like the 
 %  piano grid.
 
@@ -595,9 +599,9 @@
 \subsection{Pattern Editor / Bottom Panel}
 \label{subsec:seq24_pattern_editor_bottom}
 
-   The bottom panel of the Pattern Editor provides for selecting events for
-   viewing and edition, and the MIDI playback, pass-through, and recording
-   options of \textsl{Seq24}.
+   The bottom horizontal panel of the Pattern Editor provides for
+   selecting events for viewing and edition, and the MIDI playback,
+   pass-through, and recording options of \textsl{Seq24}.
 
 \begin{figure}[H]
    \centering 
@@ -634,7 +638,7 @@
    so we won't try to show all of them here.
 
    These sub-menus can be modified, as far as we know, by editing
-   the file \texttt{\$HOME/.seq24usr}, to make it match your instrument.
+   the file \texttt{\$HOME/.seq24usr}, to make it match one's instrument.
    See \sectionref{sec:seq24_usr_file}.
 
    \itempar{Event Selection}{pattern editor!event selection}
