@@ -325,6 +325,9 @@
 \paragraph{Pattern Keys}
 \label{paragraph:seq24_patterns_pattern_keys}
 
+   Each pattern in the patterns panel can have a hot-key associated with it.
+   \index{keys!hot-keys}
+
    \index{keys!pattern toggles}
    For each pattern, hitting its assigned keyboard key will
    also toggle its status between muted/unmuted (armed/unarmed).
@@ -344,40 +347,82 @@
    These characters are shown in the lower right corner of each
    pattern, as an aid to memory.
 
+   These hot-keys can be modified
+
    \index{keys![}
+   \index{keys!decrement set}
    The \texttt{[} and
    \index{keys!]}
+   \index{keys!increment set}
    \texttt{]} keys on the keyboard
-   switch between sets.
+   switch between sets, either decrementing or incrementing the set number.
 
-   We're not sure about the functionality of the key sequences involving the 
-   \texttt{Alt} key.  The handling of
-   \texttt{Alt} is generally taken over by the window manager.
+   The left and right Alt keys are, by default, set up in the
+   \textbf{File / Options / Keyboard / Snapshot 1} and
+   \textbf{Snapshot 2} fields to be used as "snapshot" keys.
+
+   When one of these snapshot keys is pressed, the state of the patterns
+   (which ones are armed versus unarmed) is instantly saved.  While the
+   snapshot key is pressed, on can then change the state of the patterns to
+   change how the song plays back.  When the snapshot key is released, the
+   original saved state of the patterns is restored.
 
    \index{keys!alt}
    Holding \texttt{Alt} will save the state of playing patterns and restore
-   them when \texttt{Alt} is lifted.  Not yet sure exactly what this means.
+   them when \texttt{Alt} is lifted.
 
-   \index{keys!left ctrl alt}
-   Holding \texttt{Left Ctrl} and \texttt{Alt} at the same time will enable
-   one to flip over to new patterns briefly and then flip right back upon
-   lifting \texttt{Alt}.  Not yet sure exactly what this means.
+   The handling of \texttt{Alt} is generally taken over by the window
+   manager, so there could be a need to change these items to some other
+   keys.
+
+%  \index{keys!left ctrl alt}
+%  Holding \texttt{Left Ctrl} and \texttt{Alt} at the same time will enable
+%  one to flip over to new patterns briefly and then flip right back upon
+%  lifting \texttt{Alt}.  Not yet sure exactly what this means.
 
    \index{keys!right ctrl}
+   \index{keys!queue}
    \index{queue!temporary}
 	Holding \texttt{Right Ctrl} will queue a on/off toggle for a 
-	sequence when the loop ends. This is the "temporary queue" functionality.
+	sequence when the loop ends. This is the "queue" functionality.
+   This means that the change in state of the pattern will not take hold
+   immediately, but will kick in when the pattern restarts.
+
+   This pending state is indicated by coloring the central box of the
+   pattern grey.  NEED A SCREEN SHOT.
+
    Queue also works for mute/unmute 
 	patterns (groups); in this case every sequence will toggle 
 	its status after its individual loop end. 
 
+   Of course, the Ctrl key is used to manage the GUI (e.g. Ctrl-q will
+   unceremoniously quit the application), so one will usually want to change
+   this key to something else in the
+   \textbf{File / Options / Keyboard / Queue} field.
+   The Super key (i.e. the Mod4 or Windows key) is a good candidate to
+   replace the right Ctrl key.
+
+   Note that there is also a "Replace" key, which is the left Ctrl key by
+   default.  We still need to document this functionality.
+   \index{todo!replace key}.
+
    \index{keys!backslash}
+   \index{keys!keep queue}
    \index{queue!permanent}
    \index{queue!keep queue}
 	Pressing the "keep queue" key (by default, the backslash key)
    assigned in the \textsl{~/.seq24rc} file
 	activates permanent queue mode until you use the temporary 
 	queue function again pressing \texttt{Right Ctrl}. 
+
+   This key can be changed in the
+   \textbf{File / Options / Keyboard / Keep queue} field.
+
+   There are more keys defined in the \textbf{Keyboard} dialog, and it is
+   worth figuring out what they do, if not documented here.
+   For a couple of short, but good, tutorials about using arming, queueing,
+   and snapshots, see references \cite{wootangent1}
+   and \cite{wootangent2}.
 
 \paragraph{Pattern Clicks}
 \label{paragraph:seq24_patterns_pattern_Clicks}
