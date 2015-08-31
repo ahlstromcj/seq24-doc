@@ -6,4 +6,12 @@ tex-stamp
 tex/seq24-user-manual.pdf
 !config
 !Makefile
-
+*.aux
+*.fdb_latexmk
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.out
+*.toc
