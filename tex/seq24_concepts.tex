@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-08-30
+% \update      2015-09-01
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -130,29 +130,35 @@
 \subsubsection{Concepts / Terms / queue mode}
 \label{subsubsec:concepts_terms_queue_mode}
 
-   TODO:  \index{todo!queue definition}
-   We need to figure out what "queue" refers to in the documentation, what
-   do the "temporary queue" and "permanent queue" are, and what the "keep
-   queue" functionality is used for.
+   To "queue" a pattern means to ready it for playback on the next repeat of
+   a pattern.  A pattern can be armed immediately, or it can be queued to
+   play back the next time the pattern starts.
+
+   A set of queued patterns can be temporarily stored, so that a different
+   set of playbacks can occur, before the original set of playbacks is
+   restored.
+
+   The "keep queue" functionality allows the queue to be held without
+   holding down a button the whole time.
 
 \subsubsection{Concepts / Terms / screen set}
 \label{subsubsec:concepts_terms_screen_set}
 
    The \textsl{screen set}
    \index{screen set}
-   is a set of patterns that fit within the 8x4 grid of loops/pattern in the
+   is a set of patterns that fit within the 8x4 grid of loops/patterns in the
    Patterns panel.
-   \textsl{Seq24} supports multiple screens sets, and a name can be given to
-   each for clarity.
+   \textsl{Seq24} supports multiple screens sets, up to 32 of them,
+   and a name can be given to each for clarity.
 
 \subsubsection{Concepts / Terms / sequence}
 \label{subsubsec:concepts_terms_sequence}
 
    \index{sequence}
-   \textsl{Sequence} seems to be
+   \textsl{Sequence} is
    another synonym for \textsl{pattern}, used in some of the \textsl{Seq24}
    documentation.  \textsl{Loop} is another synonym.
-   Each sequence is represented by a box in the Patterns window.
+   Each sequence is represented by a box (pattern slot) in the Patterns window.
 
 \subsubsection{Concepts / Terms / snapshot}
 \label{subsubsec:concepts_terms_snapshot}
@@ -169,6 +175,11 @@
    \index{song}
    A \textsl{song} is a collection of patterns in a specific layout, as
    assembled via the Song Editor window.
+
+\subsection{Concepts / Other}
+\label{subsec:concepts_other}
+
+TODO: Describe MIDI, JACK, ALSA, and software synthesizers.
 
 %-------------------------------------------------------------------------------
 % vim: ts=3 sw=3 et ft=tex
