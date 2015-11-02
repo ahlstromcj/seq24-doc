@@ -1,6 +1,11 @@
 Seq24 User Manual
 Chris Ahlstrom
-2015-07-19 to 2015-07-19
+2015-07-19 to 2015-11-02
+
+CURRENTLY FEATURE_FROZEN
+
+   See https://github.com/ahlstromcj/sequencer64-doc.git instead, for the
+   latest updates to the seq24 fork.
 
 This project provides two things:
 
@@ -20,3 +25,5 @@ all of the generated products.
 
 Lastly, although this manual is well underway, it needs a lot of work and
 a lot of help!
+
+# vim: sw=4 ts=4 wm=8 et ft=sh
