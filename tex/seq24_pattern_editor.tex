@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2016-02-20
+% \update      2016-05-20
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -136,7 +136,7 @@
    session.
    It will restore one change each time it is pressed.
    It is not certain what the redo limit is, however.
-   There doesn't seem to be a "Redo" key.
+   There doesn't seem to be a "Redo" key in the pattern editor.
 
    \itempar{Quantize Selection}{pattern editor!quantize}
    Pressing this button will quantize the selected events, presumably as per
@@ -174,24 +174,45 @@
          Pressing the left button on a note or a event deselects all other
          notes or events, and selects the item clicked on.
       \item \index{ctrl left click}
-         Pressing the \texttt{Ctrl} key and the left button on a note or a
-         event \textsl{adds} that event to the selection.
+         \textbf{Ctrl Left Click}.
+         Pressing the \texttt{Ctrl} key and the left button on a note or an
+         unselected event \textsl{adds} that event to the selection.
       \item \index{left click drag}
          Pressing the left mouse button and dragging also lets one
          select multiple events and notes.
       \item \index{ctrl left click drag}
-         Pressing the \texttt{Ctrl} while left-click+dragging lets one
-         make additional selections of multiple events and notes.
+         \textbf{Ctrl Left Click Drag}.
+         \begin{itemize}
+            \item Pressing the \texttt{Ctrl} while left-click-dragging
+               \textsl{on unselected events} lets one make additional
+               selections of multiple events and notes.
+            \item Pressing the \texttt{Ctrl} while left-click-dragging
+               \textsl{on an already-selected event} lets one stretch or
+               compress the lengths of multiple notes in the selection.
+         \end{itemize}
    \end{itemize}
 
+   There are many things that can be done with selected notes, as will be seen
+   in the following paragraphs.
+
+   \index{modify event-data}
+   $\bullet$ \textbf{Modify Event Data} offers a way to change the event data
+   (the lower pane of the pattern editor).  When notes are selected, and the
+   mouse is used to change the values (heights) of the lines in the event-data
+   area, only the events that are selected are changed.  The data-values of
+   selected events are left unchanged.  A cool feature from \textsl{Seq24}.
+
+   \index{modify time}
    $\bullet$ \textbf{Modify Time} offers two ways to tweak the timing of the
    selected note:
+   \index{quantize}
    \textbf{Quantize Selected Notes}, which quantizes the selected
    notes, presumably the same way as the \textbf{Quantize} ("\textbf{Q}")
    button; \textbf{Tighten Selected Notes}, which presumably is a less
    strict form of quantization.
    TODO: \index{"todo!what is tighten"} Need more information about this.
 
+   \index{modify pitch}
    $\bullet$ \textbf{Modify Pitch} has only one entry by default,
    \textbf{Transpose Selected} (not shown).
    Selecting the \textbf{Transpose Selected} entry
@@ -211,6 +232,13 @@
    another sub-menu,
    \textbf{Harmonic Transpose Selected}, which makes sure that all
    transpositions stay on the selected scale.
+
+   Note that one can also modify the pitch of selected notes by the
+   \index{mouse!left-click-drag}
+   left-click-drag action, or by moving the selection using the
+   \index{keys!down-arrow}
+   \index{keys!up-arrow}
+   up-arrow or down-arrow keys.
 
 \begin{figure}[H]
    \centering 
@@ -253,7 +281,7 @@
 
    \itempar{Zoom}{pattern editor!zoom}
    Zoom is the relation between MIDI pixels and ticks, written as
-   "pixels:ticks.
+   "pixels:ticks", where "ticks" is really the "pulses" in "PPQN".
    For example, 1:4 = 4 ticks per pixel.
    Supported values are 1:1, 1:2, 1:4, 1:8, 1:16, and 1:32.
 
@@ -740,12 +768,12 @@
    window-manager actions, such as clicking on the X button of the window
    frame, or pressing the exit key defined in the window manager.
 
-   \textsl{Sequencer64} also provides the Ctrl-W key to close the pattern
+   \textsl{Seq24} also provides the Ctrl-W key to close the pattern
    editor window.
    \index{window!close}
 
    However, be aware that this convention does not apply to the other
-   application windows of \textsl{Sequencer64}.
+   application windows of \textsl{Seq24}.
 
 %-------------------------------------------------------------------------------
 % vim: ts=3 sw=3 et ft=tex

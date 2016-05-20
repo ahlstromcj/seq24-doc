@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-20
-% \update      2015-09-02
+% \update      2016-05-20
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -35,11 +35,25 @@
 \subsection{Seq24rc / MIDI Control Section}
 \label{subsec:seq24_rc_file_midi_control}
 
+   \textsl{Seq24} provides a way to control the
+   application to some extent via a MIDI controller, such as a MIDI keyboard or
+   a MIDI pad device.  The current section describes this feature;
+   additional resources can be found a \url{linuxaudio.org}
+
    \index{[midi-control]}
    For each pattern, we can set up MIDI events to turn a 
 	pattern on, off, or to toggle it.  This setup is in the 
    MIDI Control section of \texttt{.seq24rc}, and begins with an
    "INI" group marker \texttt{[midi-control]}.
+
+   The MIDI control setup resembles a matrix.
+   The matrix represents the first two screen-sets
+   (entries are numbered from 0
+   to 63) and some control keys (entries from 64 to 73).  The three fields,
+   each between the brackets, on each line, correspond to a MIDI filter... if
+   the incoming MIDI event matches the filter it will \textsl{toggle} (first
+   field), \textsl{enable} (second field) or \textsl{disable} (third field) the
+   sequence.
 	
    THe MIDI Control section is implicitly broken into subsections, though those
    subsections are marked with comment-lines for better comprehensibility.
@@ -152,7 +166,25 @@
    the data falls outside the specified range.  This is cool because one can
    map several sequences to a knob or fader.
 
+   The \textbf{MIDI status byte} field a MIDI status byte number in decimals.
+   The channel nybble of this byte is ignored.
+   One can look the possible status values up in the MIDI messages tables; the
+   relevant data can be found in many places on the Web.
+   As the channel on which the events are sent is ignored, one should
+   always use the values for channel 1.  That is, 0.
+
 	The last three fields describe the range of data that will match.
+   The \textbf{data1} field provides the actual MIDI event message number to
+   detect, in decimal.
+   This item could be a Note On/Off event or a Control/Mode change event,
+   for example.
+
+   The \textbf{data2 min} field is the minimum value of the event
+   for the filter to match. For Note On/Off events,
+   this would be the velocity value, for example.
+
+   The \textbf{data2 max} field is the maximum value of the event
+   for the filter to match.
 
 \subsubsection{Seq24rc / MIDI Control Pattern Group}
 \label{subsubsec:seq24_rc_file_midi_control_pattern_group}
@@ -169,20 +201,31 @@
         1 [0 0 0 0 0 0]      [1 0  144 0 0 127]       [1 0 128 0 0 127]
    \end{verbatim}
 
-   The \textbf{toggle} field is off (inactive).
+   The \textbf{Toggle} field is off (inactive).  All values are 0.
+   There is no way to use MIDI control to toggle sequence 1.
 
-   The \textbf{on} field is on (active).  Inverse is inactive.  The
-   \textbf{MIDI status byte}, 144, is 0x90 (hex), which is a Note On event
-   on channel 0.  However, the channel is ignored.  \textbf{data1} is 0, and
-   \textbf(data2) can range from 0 to 127.
+   The \textbf{On} value is on (1 = active).
+   The \textbf{nverse} value is off (0 = inactive).
+   The \textbf{MIDI status byte}, 144, which is 0x90 (hex), which is a Note On
+   event on channel 0.  However, the channel is ignored.
+   The \textbf{data1} values sets the actual Note value to 0, meaning the
+   lowest possible MIDI note (pitch) value.
+   \textbf{data2 min} value sets
+   the minimum value to 0, and
+   \textbf{data2 max} sets the maximum value to 127.
+   Thus, receiving any Note On velocity for note 0 will turn sequence 1
+   \textsl{on}.
 
-   The \textbf{off} field is on (active).  The \textbf{MIDI status byte},
-   128, is 0x80 (hex), which is a Note Off event on channel 0.  Again, the
-   channel is ignored.  \textbf{data1} is 0, and \textbf{data2} can range
-   from 0 to 127.
+   The \textbf{Off} field is on (active), and it is set up the same way as the
+   \textbf{On} field, except that the status message is
+   128, which is 0x80 (hex), which is a Note Off event on channel 0.
+   Thus, receiving any Note Off velocity for note 0 will turn sequence 1
+   \textsl{off}.
 
-   So, basically, pattern 1 starts when any Note On is received, and
-   it stops when any Note Off is received.
+   So, basically, pattern 1 starts when any Note On for MIDI note 0
+   is received, and it stops when any Note Off for MIDI note 0 is received.  
+   One can easily extend this so that Note On/Off values from 0 to 31
+   control the corresponding pattern slot.
 
    The following example would map a row of sequences to one knob sending
    out changes for Control Code 1:
@@ -206,6 +249,35 @@
    that, as the controller data increases (as the modulation-wheel knob is
    turned, so to speak), patterns 0 through 7 come on one at a time until
    all are running.
+
+   Here is another example:
+   The \textsl{Akai MPK Mini} has a Sustain button and we can set the
+   Sustain MIDI event (with MIDI status byte 176 [0xB0] to represent a
+   Controller event, and control/mode change number 64 [0x40] to
+   represent the Sustain or Pedal control) up as the queue modifier in
+   the \texttt{mod queue} entry:
+
+   \begin{verbatim}
+      # mod queue
+      70 [0 0   0   0   0   0] [1 0 176  64 127 127] [1 0 176  64   0   0]
+   \end{verbatim}
+
+   So when the Sustain button is held down, and one presses one of the pads
+   on the \textsl{MPK Mini}, the corresponding sequence gets queued.
+   (STILL NOT CLEAR WHY).
+
+   Here's a little table of the decimal numbers for some commonly-used MIDI
+   controls:
+
+   \begin{verbatim}
+      128 Note On event 
+      129 Note Off event 
+      160 Polyphonic aftertouch event
+      176 Controller event 
+      192 Program change 
+      208 Aftertouch 
+      224 Pitch wheel 
+   \end{verbatim}
 
 \subsubsection{Seq24rc / MIDI Control Mute In Group}
 \label{subsubsec:seq24_rc_file_midi_control_mute_in_group}
@@ -549,6 +621,16 @@
       1
    \end{verbatim}
 
+   \index{jack!manual-alsa-ports}
+   Turning on the manual-alsa-ports option is necessary if one
+   wants to use \textsl{Seq24} with JACK.
+   It will create ports as per the settings in the "user" configuration file's
+   \texttt{user-midi-bus-definitions} and \texttt{user-midi-bus-N} sections.
+   These definitions can be used by JACK for connection, and these definitions
+   can be used to specifically rename the ports that exist in the system.
+   However, this option is misleading if one wants to have access to the
+   actual ALSA ports that exist on the system.
+   The next option gets around that issue.
    \index{[interaction-method]}
    This configuration item is the same as the 
    \textbf{Mouse} tab described in

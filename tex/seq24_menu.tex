@@ -6,7 +6,7 @@
 % \library     Documents
 % \author      Chris Ahlstrom
 % \date        2015-07-19
-% \update      2015-07-22
+% \update      2016-05-20
 % \version     $Revision$
 % \license     $XPC_GPL_LICENSE$
 %
@@ -18,23 +18,19 @@
 \label{sec:seq24_menu}
 
    The \textsl{Seq24} menu, as seen at the top of
-   \figureref{fig:seq24_main_screen},
-   is fairly simple, but it is important to understand the
-   structure of the menu entries.
+   \figureref{fig:seq24_main_screen}, is fairly simple, but it is important to
+   understand the structure of the menu entries.
 
 \subsection{Menu / File}
 \label{subsec:seq24_menu_file}
 
-   The \textbf{File} menu is used to save and load standard 
-   MIDI files.  It should be able to handle any 
-   Format 1 standard files that any other sequencer 
-   is capable of exporting.  
+   The \textbf{File} menu is used to save and load standard MIDI files.
+   \textsl{Seq24} should be able to handle any Format 1 standard files that any
+   other sequencer is capable of exporting.  
 
-   The \textsl{Seq24}
-   menu entry contains the sub-items shown in
-   \figureref{fig:seq24_menu_file_items}.
-   The next few sub-sections discuss the sub-items in the 
-   \textsl{File} sub-menu.
+   The \textsl{Seq24} menu entry contains the sub-items shown in
+   \figureref{fig:seq24_menu_file_items}.  The next few sub-sections discuss the
+   sub-items in the \textsl{File} sub-menu.
 
 \begin{figure}[H]
    \centering 
@@ -65,7 +61,7 @@
 \label{subsubsec:seq24_menu_file_open}
 
    The \textbf{Open} menu entry opens a song that had been saved previously.
-   It opens up a standard GTK+ file dialog.
+   It opens up a standard GTK+2 file dialog.
 
 \begin{figure}[H]
    \centering 
@@ -75,14 +71,15 @@
 \end{figure}
 
    If unsaved changes are pending, the user will be prompted to save the
-   changes.
+   changes.  When in doubt, save!  If still in doubt, keep backups of your
+   tunes!
 
 \subsubsection{Menu / File / Save and Save As}
 \label{subsubsec:menu_file_open_save_as}
 
    The \textbf{Save} menu entry saves the song under its current name.
    If there is no current name, then
-   it opens up a standard GTK+ file dialog.
+   it opens up a standard GTK+2 file dialog.
 
    The \textbf{Save As} menu entry saves a song under a different name.
    It opens up the following standard GTK+ file dialog.
@@ -140,6 +137,21 @@
    a transcription of an Eric Clapton tune that we'd made over 20 
    years ago and had uploaded to the \textsl{GEnie} network service.
 
+   Note the additional file-dialog field,
+   \textbf{Select Screen Offset}.
+   \index{import!select screen offset}
+   \index{select screen offset}
+   This setting lets one place the imported data into a screen-set other than
+   the first screen-set, screen-set 0.
+   This field is not editable.  It requires using the scroll button to move the
+   screen set offset up or down in value.  The legal values range from -31 to 0
+   to +31.
+   
+   When the file is imported, the sequence number for each track read in is
+   adjusted to put the track in the desired screen set.  The negative numbers
+   are probably more useful to move sequences around in an already-created
+   \textsl{Seq24} song file with a lot of screen-sets in it.
+
 \begin{figure}[H]
    \centering 
    \includegraphics[scale=0.90]{menu/imported_midi_song.png}
@@ -167,6 +179,47 @@
    The \textbf{MIDI Clock} tab provides a way to send the MIDI clock to one
    or more of the \textsl{Seq24} output busses.
    It is used to configure to what busses the MIDI clock gets dumped.
+   It also shows the devices that one can play music with.
+   The items that appear in this tab depend on three things:
+
+   \begin{itemize}
+      \item What MIDI devices are connected to the computer.  For example,
+         MIDI controllers, USB MIDI cables, and other devices will add MIDI
+         output devices (ports) to the system.
+      \item What MIDI software devices are running on the computer.
+         For example, running MIDI software synthesizers such as
+         \textsl{Timidity} and \textsl{Yoshimi} will add extra output devices
+         (playback ports) to a system.
+      \item The setting of the "manual ALSA ports" option,
+         \texttt{--manual\_alsa\_ports} command-line option or the
+         \texttt{[manual-alsa-ports]} section of the
+         \texttt{seq24rc} configuration file.
+   \end{itemize}
+
+   For the current discussion, a USB MIDI cable was plugged into the system,
+   and the \textsl{Timidity} and \textsl{Yoshimi} (in ALSA mode) software
+   synthesizers were running.  \textsl{Seq24} was also running, of
+   course.  Here are the devices shown by the ALSA MIDI playback
+   command-line application:
+
+   \begin{verbatim}
+      $ aplaymidi -l
+       Port    Client name                      Port name
+       14:0    Midi Through                     Midi Through Port-0
+       24:0    USB2.0-MIDI                      USB2.0-MIDI MIDI 1
+       24:1    USB2.0-MIDI                      USB2.0-MIDI MIDI 2
+      128:0    TiMidity                         TiMidity port 0
+      128:1    TiMidity                         TiMidity port 1
+      128:2    TiMidity                         TiMidity port 2
+      128:3    TiMidity                         TiMidity port 3
+      130:16   seq24                            seq24 in
+   \end{verbatim}
+
+   (For some reason, the \textsl{Yoshimi} input port is not showing up
+   in the output of \texttt{aplaymidi}.
+   \textsl{Seq24} sees it on port 7.  Perhaps that application is not
+   providing a good ALSA device name.)
+   
 
 \begin{figure}[H]
    \centering 
@@ -194,6 +247,12 @@
 
    \itempar{Off}{midi clock!off}
    This setting disables the MIDI clock for the given output buss.
+   However, note that MIDI output can still be sent to those ports, and
+   each port that has a device connected to it will play music.
+   
+   For feeding \textsl{Yoshimi} with MIDI data, we found that this
+   setting is the one that must be made in order for \textsl{Yoshimi} to
+   produce a sound.
 
    \itempar{On (Pos)}{midi clock!on (pos)}
    The MIDI clock will be sent to this buss.
@@ -216,12 +275,41 @@
    "rc" file as described in
    \sectionref{subsec:seq24_rc_file_other_midi}.
 
+   With the manual ALSA option turned off,
+   all of the devices that can be driven by MIDI output are shown,
+   including the MIDI Thru port, the two MIDI ports on the USB cable,
+   the four ports provided by \textsl{Timidity}, and the unlabelled
+   port provided by \textsl{Yoshimi}.
+
+   One could theoretically play music through 6 or 7 devices using
+   \textsl{Seq24} with this setup.
 
 \paragraph{Menu / File / Options / MIDI Input}
 \label{paragraph:seq24_menu_file_options_midi_input}
 
+   To allow \textsl{Seq24} to record MIDI from MIDI devices such as
+   controllers and keyboards, the output of the ALSA MIDI recording
+   command-line application is relevant:
+
+   \begin{verbatim}
+      $ arecordmidi -l
+       Port    Client name                      Port name
+       14:0    Midi Through                     Midi Through Port-0
+       24:0    USB2.0-MIDI                      USB2.0-MIDI MIDI 1
+      130:0    seq24                            [1] seq24 1
+      130:1    seq24                            [2] seq24 2
+      130:2    seq24                            [3] seq24 3
+       . . .   . . .                               . . .
+      130:15   seq24                            [16] seq24 16
+   \end{verbatim}
+
    The only item in the \textbf{MIDI Input} tab is the single MIDI input
    buss provided by \textsl{Seq24}:  \textbf{[0] seq24 0}.
+
+   If the "manual ALSA ports" option (see below) is turned on,
+   then the only item in the \textbf{MIDI Input} tab is the single MIDI input
+   buss provided by \textsl{Seq24}:  \textbf{[0] seq24 0}, or, since
+   the MIDI Thru port takes slot 0, \textbf{[1] seq24 1}.
 
 \begin{figure}[H]
    \centering 
@@ -236,6 +324,14 @@
    to allow pass-through
    (in the Pattern Editor, as discussed in 
    \sectionref{subsec:seq24_pattern_editor_bottom}.)
+
+   If the "manual ALSA ports" option is turned off, then
+   the input ports from the system are shown.
+   For example, one could check input \#1 to have \textsl{Seq24} record
+   MIDI from an old-fashioned MIDI keyboard that is connected to the USB MIDI
+   cable.  If the keyboard didn't have a sound generator, one would also want
+   \textsl{Seq24} to pass this MIDI on to a sound generator, such as a
+   software or hardware synthesizer attached to one of the ports.
 
 \paragraph{Menu / File / Options / Keyboard }
 \label{paragraph:seq24_menu_file_options_keyboard}
@@ -316,6 +412,24 @@
    \index{todo!keep queue}
    Another thing is the "queue" and "keep queue" features.
 
+   \index{queue}
+   To "queue" a pattern means to ready it for playback upon the next repeat
+   of a pattern.  A pattern can be armed immediately, or it can be queued to
+   play back the next time the pattern starts.
+   A pattern can be queued by holding the queue key (defined in
+   \textbf{File / Options / Keyboard / queue}) and pressing a pattern-slot
+   shortcut key.  Instead of the pattern turning on immediately, it turns on at
+   the next repeat of the pattern.
+
+   \index{keep queue}
+   \index{queue!keep}
+   The "keep queue" functionality allows the queue to be held without holding
+   down the queue button the whole time.  First, press the keep-queue key
+   (defined in \textbf{File / Options / Keyboard / Keep queue}).  Now, hitting
+   any of the shortcut keys, no matter how many, sets up the corresponding
+   pattern slot to be queued.  This mode is disabled by hitting the
+   "queue" key (any currently active queues remain active until finished).
+
    \itempar{Sequence toggle keys}{keyboard!sequence toggle keys}
    Each of these keys toggles the playing/muting of one of the 32
    loop/pattern boxes.  These keys are layed out logically on the keyboard,
@@ -328,9 +442,12 @@
    and can also be shown in each loop/pattern box.  No need to list them all
    here!
 
-   TODO: \index{todo!mute-group}
+   \index{todo!mute-group}
    One thing we need to discover is just what this mute-grouping
    means functionally.
+   Apparently groups work with the playing screen set only.
+   Change the screenset and give the command to make it the playing one
+   (e.g. set the HOME key for this purpose.)
 
    \itempar{Learn}{keyboard!learn}
    Learn (while pressing a mute-group key).
@@ -365,6 +482,7 @@
    The alternate method is \textbf{fruity (similar to a certain well known
    sequencer)}.
 
+   \index{mouse!fruity}
    The alternate method is presumably that of the \textsl{Fruity Loops}
    (now \textsl{FL Studio}) sequencer.  The fruity mode seems to involve the
    following (based on scanning the source code):
@@ -381,6 +499,28 @@
       \item \textbf{Middle-click}.
          Split the note?
    \end{itemize}
+
+   The \textsl{Seq24} "original style" is pretty much as expected for basic
+   actions such as selecting and moving notes using the left mouse button.
+   Drawing a note or event is a bit different, in the one must first
+   \textsl{click and hold} the right mouse button, and then
+   \textsl{click and drag} the right mouse button to insert notes,
+   Notes are inserted to be at the current length and grid-snap values for
+   the sequence editor for as long as the left button is pressed.
+   Notes are inserted only up to the boundary of the sequence length.
+   And, once notes are inserted, moving the mouse with the left button still
+   held down simply moves the notes to the new note value of the mouse.
+
+   If one releases the left button, then presses and holds it again,
+   more notes will be added in the same way.
+   This is strange, but it is a powerful way to layer notes into a short
+   sequence.
+   We call it the \index{draw mode} \index{mode!draw } "draw mode" or
+   \index{paint mode} \index{mode!paint } "paint mode".
+
+   Note that drawing/painting can also be done while the sequence is playing,
+   and notes will be added to be played the next time the progress bar crosses
+   them.
 
 \paragraph{Menu / File / Options / Jack Sync }
 \label{paragraph:seq24_menu_file_options_jack_sync}
@@ -404,6 +544,8 @@
    \setcounter{ItemCounter}{0}      % Reset the ItemCounter for this list.
 
    \itempar{Transport}{jack sync!transport}
+   These settings are stored in the "rc" file settings group
+   \texttt{[jack-transport]}.
    This items collects the following settings:
 
    \begin{itemize}
@@ -419,19 +561,50 @@
          already a Master set.
    \end{itemize}
 
+   Note that there are long-standing issues with the JACK support of
+   \textsl{Seq24}, and \textsl{Seq24} currently inherits some of them,
+   in spite of some bug fixes.  Generally, if one experiences issues in
+   transport control, try making one of the other sequencer applications the
+   JACK Master.
+
+   If one makes a change in the JACK settings, it is best to
+   then press the \textbf{Disconnect} button, then the \textbf{Connect}
+   button.  Another option is to restart \textsl{Seq24}... the settings
+   are automatically saved when \textsl{Seq24} exits.
+
    \itempar{Transport}{jack sync!transport}
    This items collects the following settings:
 
    \begin{itemize}
       \item \textbf{Live Mode}.
          \index{JACK!live mode}
+         \index{live mode}
+         \index{non-playback mode}
          Playback will be in live mode.  Use this option to allow muting and
          unmuting of patterns.
+         The command-line option is \texttt{--jack\_start\_mode 0}.
       \item \textbf{Song Mode}.
          \index{JACK!song mode}
+         \index{song mode}
+         \index{playback mode}
+         \index{performance mode}
          Playback will use only the Song Editor's data.
+         The command-line option is \texttt{--jack\_start\_mode 1}.
    \end{itemize}
 
+   Note that, in ALSA mode (non-JACK mode), \textsl{Seq24} 
+   now \textsl{does} select the playback modes
+   according to which window started the playback.
+   
+   \textsl{The main window, or pattern
+   window, causes playback to be in live mode.  The user can arm and mute
+   patterns in that windows, by clicking on sequences, using their hot-keys,
+   and by using the group-mode and learn-mode features (we think).
+   The song editor causes playback to be in performance mode, also known as
+   "playback mode", or "song mode".}
+
+   Of course, in JACK mode,
+   it selects them according to the chosen live/song mode as discussed above.
    \itempar{Connect}{jack sync!connect}
    Connect to JACK Sync.
 
@@ -446,6 +619,10 @@
    window.  Selecting this item bring up the Song Editor window.
    See \figureref{fig:song_editor_window}
 
+   The Song Editor window can also be brought up via the
+   \index{song editor!ctrl-e}
+   \index{keys!ctrl-e}
+   Ctrl-E key.
 \subsection{Menu / Help About...}
 \label{subsec:seq24_menu_about}
 
@@ -478,9 +655,7 @@
    \label{fig:seq24_menu_help_doc}
 \end{figure}
 
-   Shows who has documented this project.  Say, maybe "we" can get "our"
-   name there someday!  \texttt{:-)}
-
+   Shows who has documented this project.
 
 %-------------------------------------------------------------------------------
 % vim: ts=3 sw=3 et ft=tex
